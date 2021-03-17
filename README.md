@@ -1,4 +1,4 @@
-# flutter_simulador_parcela
+# Simulador de Parcela Variável - Flutter
 
 A new Flutter project.
 

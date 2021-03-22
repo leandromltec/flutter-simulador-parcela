@@ -36,13 +36,15 @@ dev_dependencies:
     sdk: flutter
 
   flutter_native_splash: ^1.0.3
+  flutter_material_pickers: ^2.0.0
+  direct_select_flutter: ^1.1.0
 
 flutter_native_splash:
     color: "#ffffff"
     image: assets/images/splash_screen.png
     android: true
     ios: true
-    android_gravity: fill
+    android_gravity: center
     ios_content_mode: scaleAspectFill
 
 

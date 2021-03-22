@@ -11,6 +11,8 @@ class AnimatedHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      //Remove o botão voltar na navegação de telas
+      automaticallyImplyLeading: false,
       expandedHeight: 200.0,
       floating: false,
       pinned: true,

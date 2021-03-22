@@ -18,7 +18,7 @@ class HomeButton extends StatelessWidget {
               image: AssetImage('assets/images/icon_button_home.png'),
             ),
           ),
-          onPressed: null),
+          onPressed: () => Navigator.of(context).pushNamed('/')),
     );
   }
 }

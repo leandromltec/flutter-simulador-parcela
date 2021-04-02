@@ -24,7 +24,7 @@ class _ButtonHomePagesState extends State<ButtonHomePages> {
         margin: EdgeInsets.only(left: 40.0, top: 10, right: 40.0, bottom: 10),
         width: double.infinity,
         child: Card(
-          color: colorBackgroundButton,
+          color: colorBackgroundButtonHome,
           child: InkWell(
             onTap: () {
               Navigator.of(context).pushNamed("/" + widget.namePage);

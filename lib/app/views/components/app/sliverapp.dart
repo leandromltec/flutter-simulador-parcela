@@ -13,15 +13,15 @@ class AnimatedHeader extends StatelessWidget {
     return SliverAppBar(
       //Remove o botão voltar na navegação de telas
       //automaticallyImplyLeading: false,
-      expandedHeight: 200.0,
-      floating: false,
+      expandedHeight: 100.0,
+      floating: true,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
           "Simulador \nParcela Variável",
           style: TextStyle(color: Colors.white, fontSize: 14.0),
         ),
-        titlePadding: EdgeInsetsDirectional.only(start: 50, bottom: 60),
+        titlePadding: EdgeInsetsDirectional.only(start: 50, bottom: 10),
         collapseMode: CollapseMode.parallax,
         background: Image.asset(
           'assets/images/background_sliverapp.png',

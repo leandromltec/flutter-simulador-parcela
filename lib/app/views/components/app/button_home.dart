@@ -9,7 +9,7 @@ class HomeButton extends StatelessWidget {
       height: 75,
       child: FloatingActionButton(
           tooltip: "Home",
-          backgroundColor: colorBackgroundButton,
+          backgroundColor: colorBackgroundButtonHome,
           child: Container(
             width: 50,
             height: 50,

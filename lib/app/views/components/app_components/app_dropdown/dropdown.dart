@@ -27,7 +27,7 @@ class _DropDownItemsState extends State<DropDownItems> {
                   color: borderColorDropDown),
               borderRadius: BorderRadius.all(Radius.circular(10)))),
       width: MediaQuery.of(context).size.width,
-      height: 50,
+      height: 40,
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
           items: widget.listItemsDropDown.map((ItemDropdDown e) {
@@ -37,7 +37,7 @@ class _DropDownItemsState extends State<DropDownItems> {
             );
           }).toList(),
           isExpanded: true,
-          hint: Text("Selecione"),
+          //hint: Text("Selecione"),
           onChanged: (value) {
             setState(() {
               //widget.itemSelected = value;

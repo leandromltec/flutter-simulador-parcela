@@ -3,9 +3,6 @@
 /* Linkedin - https://www.linkedin.com/in/leandro-loureiro-dev/ */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';
-import 'package:flutter_simulador_parcela/app/views/components/app/sliverapp.dart';
-import 'package:flutter_simulador_parcela/app/views/components/app_components/dropdown_directselect.dart';
 import 'package:flutter_simulador_parcela/app/views/home/components_home/button_home_pages.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 

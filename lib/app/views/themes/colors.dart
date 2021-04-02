@@ -9,3 +9,7 @@ final colorBackgroundButton = Color(0XFF35ced4);
 final colorBackgroundIcon = Color(0xFF0084c7);
 
 const Color secundaryColor = Color(0XFF894da5);
+
+const Color dividerColor = Color(0XFF14b2d5);
+
+const Color borderColorDropDown = Color(0XFF0c82c0);

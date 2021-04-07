@@ -16,6 +16,10 @@ class PVIScreen extends StatefulWidget {
 }
 
 class _PVIScreenState extends State<PVIScreen> {
+  validateForm() {
+    print("ok");
+  }
+
   @override
   Widget build(BuildContext context) {
     List<ItemDropdDown> lista = [
@@ -98,12 +102,12 @@ class _PVIScreenState extends State<PVIScreen> {
             width: 200,
             height: 50,
             child: elevatedButton(
-                titleButton: 'Filtrar', iconButton: Icons.search),
+                titleButton: 'Filtrar',
+                iconButton: Icons.search,
+                onPressedFunction: validateForm()),
           ),
         ),
       ],
     ));
   }
-
-  void validateForm() {}
 }

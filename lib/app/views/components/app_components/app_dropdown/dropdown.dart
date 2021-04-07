@@ -3,10 +3,10 @@ import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 
 class DropDownItems extends StatefulWidget {
-  ItemDropdDown itemSelected;
+  ItemDropdDown? itemSelected;
   List<ItemDropdDown> listItemsDropDown;
 
-  DropDownItems({required this.itemSelected, required this.listItemsDropDown});
+  DropDownItems({this.itemSelected, required this.listItemsDropDown});
 
   @override
   _DropDownItemsState createState() => _DropDownItemsState();
@@ -32,15 +32,14 @@ class _DropDownItemsState extends State<DropDownItems> {
         child: DropdownButton(
           items: widget.listItemsDropDown.map((ItemDropdDown e) {
             return DropdownMenuItem<ItemDropdDown>(
-              child: Text(e.title),
+              child: Text(e.title!),
               value: e,
             );
           }).toList(),
           isExpanded: true,
-          //hint: Text("Selecione"),
-          onChanged: (value) {
+          onChanged: (ItemDropdDown? value) {
             setState(() {
-              //widget.itemSelected = value;
+              widget.itemSelected = value;
             });
           },
           value: widget.itemSelected,

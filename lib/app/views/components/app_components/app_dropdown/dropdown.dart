@@ -1,12 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';
+import 'package:flutter_simulador_parcela/app/services/shared_local_service.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 
 class DropDownItems extends StatefulWidget {
   ItemDropdDown? itemSelected;
   List<ItemDropdDown> listItemsDropDown;
+  dynamic? keyStorage;
 
-  DropDownItems({this.itemSelected, required this.listItemsDropDown});
+  SharedLocalStorage localStorage = new SharedLocalStorage();
+
+  DropDownItems(
+      {this.itemSelected, required this.listItemsDropDown, this.keyStorage});
 
   @override
   _DropDownItemsState createState() => _DropDownItemsState();
@@ -37,9 +44,11 @@ class _DropDownItemsState extends State<DropDownItems> {
             );
           }).toList(),
           isExpanded: true,
-          onChanged: (ItemDropdDown? value) {
+          onChanged: (dynamic? value) {
             setState(() {
               widget.itemSelected = value;
+              String teste = jsonEncode(ItemDropdDown.fromJson(value));
+              widget.localStorage.put(widget.keyStorage, teste);
             });
           },
           value: widget.itemSelected,

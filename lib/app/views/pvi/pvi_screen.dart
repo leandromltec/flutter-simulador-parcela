@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';
+import 'package:flutter_simulador_parcela/app/services/shared_local_service.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/app_dropdown/dropdown_required.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/button_app.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
@@ -16,8 +17,16 @@ class PVIScreen extends StatefulWidget {
 }
 
 class _PVIScreenState extends State<PVIScreen> {
-  validateForm() {
-    print("ok");
+  bool requiredGerencia = false;
+  bool requiredInstalacao = false;
+  bool requiredNomeOperacional = false;
+
+  SharedLocalStorage localStorage = new SharedLocalStorage();
+
+  @override
+  void iniState() {
+    _loadSelected();
+    super.initState();
   }
 
   @override
@@ -49,13 +58,15 @@ class _PVIScreenState extends State<PVIScreen> {
         DropDownItems(
           itemSelected: lista[0],
           listItemsDropDown: lista,
+          keyStorage: 'gerencia',
         ),
-        RequiredInformationDropdown(
-          iconeRequired: requiredAsterisk(),
-          validatorRequired: "Selecione uma gerência",
-          colorValidatorRequired: Colors.red,
-        ),
-        SizedBox(height: 15),
+        if (requiredGerencia == true)
+          RequiredInformationDropdown(
+            iconeRequired: requiredAsterisk(),
+            validatorRequired: "Selecione uma gerência",
+            colorValidatorRequired: Colors.red,
+          ),
+        SizedBox(height: 30),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -67,12 +78,13 @@ class _PVIScreenState extends State<PVIScreen> {
           itemSelected: lista[0],
           listItemsDropDown: lista,
         ),
-        RequiredInformationDropdown(
-          iconeRequired: requiredAsterisk(),
-          validatorRequired: "Selecione uma instalação",
-          colorValidatorRequired: Colors.red,
-        ),
-        SizedBox(height: 15),
+        if (requiredInstalacao == true)
+          RequiredInformationDropdown(
+            iconeRequired: requiredAsterisk(),
+            validatorRequired: "Selecione uma instalação",
+            colorValidatorRequired: Colors.red,
+          ),
+        SizedBox(height: 30),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -89,12 +101,13 @@ class _PVIScreenState extends State<PVIScreen> {
           itemSelected: lista[0],
           listItemsDropDown: lista,
         ),
-        RequiredInformationDropdown(
-          iconeRequired: requiredAsterisk(),
-          validatorRequired: "Selecione uma operação",
-          colorValidatorRequired: Colors.red,
-        ),
-        SizedBox(height: 30),
+        if (requiredNomeOperacional == true)
+          RequiredInformationDropdown(
+            iconeRequired: requiredAsterisk(),
+            validatorRequired: "Selecione uma operação",
+            colorValidatorRequired: Colors.red,
+          ),
+        SizedBox(height: 40),
         Padding(
           padding: const EdgeInsets.only(bottom: 50),
           child: Container(
@@ -104,10 +117,18 @@ class _PVIScreenState extends State<PVIScreen> {
             child: elevatedButton(
                 titleButton: 'Filtrar',
                 iconButton: Icons.search,
-                onPressedFunction: validateForm()),
+                onPressedFunction: null),
           ),
         ),
       ],
     ));
+  }
+
+  void _loadSelected() async {
+    var gerencia = await localStorage.getValor('gerencia');
+
+    if (gerencia != null) {
+      print("contem valor gerencia");
+    }
   }
 }

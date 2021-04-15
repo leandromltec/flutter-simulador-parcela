@@ -14,7 +14,7 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: '/pvi/filtros',
     ).modular();
   }
 }

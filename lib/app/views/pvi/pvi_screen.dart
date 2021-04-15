@@ -112,18 +112,13 @@ class _PVIScreenState extends State<PVIScreen> {
         SizedBox(height: 40),
         Padding(
           padding: const EdgeInsets.only(bottom: 50),
-          child: Container(
-            color: Colors.yellow,
-            width: 200,
-            height: 50,
-            child: elevatedButton(
-                titleButton: 'Filtrar',
-                iconButton: Icons.search,
-                onPressedFunction: () {
-                  //if (requiredNomeOperacional == true)
-                  Navigator.of(context).pushNamed('/pvi/filtros');
-                }),
-          ),
+          child: elevatedButton(
+              titleButton: 'Filtrar',
+              iconButton: Icons.search,
+              onPressedFunction: () {
+                //if (requiredNomeOperacional == true)
+                Navigator.of(context).pushNamed('/pvi/filtros');
+              }),
         ),
       ],
     ));

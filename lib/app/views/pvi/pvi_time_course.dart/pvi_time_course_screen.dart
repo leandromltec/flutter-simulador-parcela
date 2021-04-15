@@ -13,28 +13,41 @@ class _PVITimeCourseScreenState extends State<PVITimeCourseScreen> {
   Widget build(BuildContext context) {
     return templatePage(
         columnSliverContentPage: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         titlePage("Resultado filtros PVI"),
         dividerSession(),
-        Container(width: double.infinity, child: Text("Módulo")),
-        Container(
-            width: double.infinity,
-            child: Text("MD - Referente a gerência 1 (MDG1)")),
-        SizedBox(height: 20),
-        Container(width: double.infinity, child: Text("Empresa 1")),
-        Container(width: double.infinity, child: Text("EMP - 1 (MD/G1)")),
-        SizedBox(height: 20),
-        Container(width: double.infinity, child: Text("Empresa 2")),
-        Container(
-            width: double.infinity,
-            child: Text("EMP - Empresa de representação gerência 2 (MD/G1)")),
-        SizedBox(height: 20),
-        Container(width: double.infinity, child: Text("ONN")),
-        Container(width: double.infinity, child: Text("MD - EMP1 (G1)")),
-        SizedBox(height: 20),
-        Container(width: double.infinity, child: Text("Valor")),
-        Container(width: double.infinity, child: Text("R\$ 2565688")),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+                margin: EdgeInsets.only(left: 25, right: 25),
+                child: Text("Programado")),
+            Container(
+              width: 30.0,
+              child: Radio(
+                value: 2,
+                groupValue: 1,
+                onChanged: (int? value) {
+                  setState(() {});
+                },
+              ),
+            ),
+            Container(
+                margin: EdgeInsets.only(right: 20), child: Text("Urgência")),
+            Container(
+              width: 30.0,
+              child: Radio(
+                value: 2,
+                groupValue: 1,
+                onChanged: (int? value) {
+                  setState(() {});
+                },
+              ),
+            ),
+            Container(
+                margin: EdgeInsets.only(right: 20), child: Text("Emergência")),
+          ],
+        )
       ],
     ));
   }

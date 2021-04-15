@@ -29,6 +29,7 @@ dependencies:
   mobx: ^2.0.1
   flutter_mobx: ^2.0.0
   dio: ^4.0.0
+  auto_size_text: ^2.1.0
   
 
 

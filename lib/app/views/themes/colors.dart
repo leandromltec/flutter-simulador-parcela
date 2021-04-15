@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+//Documentação consultada
+
+//Cores
+//https://api.flutter.dev/flutter/material/Colors-class.html
+
 final backgroundAppColor = Colors.grey[200];
 
 //final colorBackgroundButton = Color(0XFF15b4d4);

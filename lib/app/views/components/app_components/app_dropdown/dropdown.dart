@@ -47,8 +47,9 @@ class _DropDownItemsState extends State<DropDownItems> {
           onChanged: (dynamic? value) {
             setState(() {
               widget.itemSelected = value;
-              String teste = jsonEncode(ItemDropdDown.fromJson(value));
-              widget.localStorage.put(widget.keyStorage, teste);
+              widget.localStorage.put(widget.keyStorage, value.id);
+              /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
+              widget.localStorage.put(widget.keyStorage, teste);*/
             });
           },
           value: widget.itemSelected,

@@ -17,6 +17,8 @@ class PVIScreen extends StatefulWidget {
 }
 
 class _PVIScreenState extends State<PVIScreen> {
+  var gerencia;
+
   bool requiredGerencia = false;
   bool requiredInstalacao = false;
   bool requiredNomeOperacional = false;
@@ -24,7 +26,7 @@ class _PVIScreenState extends State<PVIScreen> {
   SharedLocalStorage localStorage = new SharedLocalStorage();
 
   @override
-  void iniState() {
+  void initState() {
     _loadSelected();
     super.initState();
   }
@@ -117,7 +119,10 @@ class _PVIScreenState extends State<PVIScreen> {
             child: elevatedButton(
                 titleButton: 'Filtrar',
                 iconButton: Icons.search,
-                onPressedFunction: null),
+                onPressedFunction: () {
+                  //if (requiredNomeOperacional == true)
+                  Navigator.of(context).pushNamed('/pvi/filtros');
+                }),
           ),
         ),
       ],
@@ -125,7 +130,7 @@ class _PVIScreenState extends State<PVIScreen> {
   }
 
   void _loadSelected() async {
-    var gerencia = await localStorage.getValor('gerencia');
+    gerencia = await localStorage.getValor('gerencia');
 
     if (gerencia != null) {
       print("contem valor gerencia");

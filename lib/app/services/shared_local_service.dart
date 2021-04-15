@@ -14,7 +14,7 @@ class SharedLocalStorage {
   @override
   Future getValor(String key) async {
     var shared = await SharedPreferences.getInstance();
-    return shared.getInt(key);
+    return shared.get(key);
   }
 
   @override

@@ -1,4 +1,4 @@
-import 'package:auto_size_text/auto_size_text.dart';
+//import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 
@@ -24,11 +24,11 @@ Widget resultTextFilter({required String resultText}) {
   return Container(
       margin: EdgeInsets.only(left: 25, right: 25),
       width: double.infinity,
-      child: AutoSizeText(
+      child: Text(
         resultText,
         maxLines: 2,
-        minFontSize: 12.0,
-        maxFontSize: 14.0,
+        //minFontSize: 12.0,
+        //maxFontSize: 14.0,
         style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
       ));
 }

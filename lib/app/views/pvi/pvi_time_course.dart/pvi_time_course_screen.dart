@@ -14,14 +14,14 @@ class _PVITimeCourseScreenState extends State<PVITimeCourseScreen> {
     return templatePage(
         columnSliverContentPage: Column(
       children: [
-        titlePage("Resultado filtros PVI"),
+        titlePage("Período PVI"),
         dividerSession(),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
                 margin: EdgeInsets.only(left: 25, right: 25),
-                child: Text("Programado")),
+                child: Text("Período")),
             Container(
               width: 30.0,
               child: Radio(
@@ -33,7 +33,7 @@ class _PVITimeCourseScreenState extends State<PVITimeCourseScreen> {
               ),
             ),
             Container(
-                margin: EdgeInsets.only(right: 20), child: Text("Urgência")),
+                margin: EdgeInsets.only(right: 20), child: Text("Contínuo")),
             Container(
               width: 30.0,
               child: Radio(
@@ -45,7 +45,68 @@ class _PVITimeCourseScreenState extends State<PVITimeCourseScreen> {
               ),
             ),
             Container(
-                margin: EdgeInsets.only(right: 20), child: Text("Emergência")),
+                margin: EdgeInsets.only(right: 20), child: Text("Diário")),
+          ],
+        ),
+        dividerSession(),
+        Wrap(
+          //mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              color: Colors.red,
+              width: 200,
+              child: CheckboxListTile(
+                title: Container(
+                  width: 50,
+                  color: Colors.yellow,
+                  child: Text("Isenta (IN/SO)",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold)),
+                ),
+                value: true,
+                onChanged: (value) {
+                  setState(() {});
+                },
+                controlAffinity: ListTileControlAffinity.leading,
+                activeColor: const Color(0xFF1565C0),
+              ),
+            ),
+            Container(
+              color: Colors.red,
+              width: 200,
+              child: CheckboxListTile(
+                title: Text("PMM",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.bold)),
+                value: true,
+                onChanged: (value) {
+                  setState(() {});
+                },
+                controlAffinity: ListTileControlAffinity.leading,
+                activeColor: const Color(0xFF1565C0),
+              ),
+            ),
+            Container(
+              color: Colors.red,
+              width: 200,
+              child: CheckboxListTile(
+                title: Text("NTT",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.bold)),
+                value: true,
+                onChanged: (value) {
+                  setState(() {});
+                },
+                controlAffinity: ListTileControlAffinity.leading,
+                activeColor: const Color(0xFF1565C0),
+              ),
+            ),
           ],
         )
       ],

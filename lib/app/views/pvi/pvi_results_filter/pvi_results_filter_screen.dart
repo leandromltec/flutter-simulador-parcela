@@ -4,6 +4,7 @@ import 'package:flutter_simulador_parcela/app/views/components/app_components/di
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:flutter_simulador_parcela/app/views/pvi/pvi_results_filter/pvi_results_filter_components.dart';
+import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 
 class PVIResultsFilterPVI extends StatefulWidget {
   @override
@@ -42,15 +43,23 @@ class _PVIResultsFilterPVIState extends State<PVIResultsFilterPVI> {
             operation: "Operação 1",
             operationCode: "Código Operação 1"),
         Padding(
-          padding: const EdgeInsets.only(top: 10, bottom: 50),
-          child: elevatedButton(
-              titleButton: 'Período',
-              iconButton: Icons.timer,
-              onPressedFunction: () {
-                //if (requiredNomeOperacional == true)
-                Navigator.of(context).pushNamed('/pvi/filtros');
-              }),
-        ),
+            padding: const EdgeInsets.only(bottom: 50),
+            child: Container(
+              width: 200,
+              height: 40,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/pvi/time');
+                },
+                icon: Icon(Icons.timer),
+                label: Text(
+                  'Período',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                style: ElevatedButton.styleFrom(
+                    primary: colorBackgroundElevatedButtonApp, elevation: 3),
+              ),
+            )),
       ],
     ));
   }

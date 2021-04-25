@@ -18,7 +18,7 @@ class AppModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => HomePage()),
     ChildRoute('/pvi', child: (_, args) => PVIScreen()),
-    ChildRoute('/pvi/filtros', child: (_, args) => PVIResultsFilterPVI()),
+    ChildRoute('/pvi/resultado', child: (_, args) => PVIResultsFilterPVI()),
     ChildRoute('/pvi/time', child: (_, args) => PVITimeCourseScreen())
   ];
 

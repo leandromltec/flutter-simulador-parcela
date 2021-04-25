@@ -19,6 +19,14 @@ class BottomMenuNavigation extends StatelessWidget {
             icon: Icon(Icons.calculate),
             onPressed: () {},
           ),
+          IconButton(
+            icon: Icon(Icons.room),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.room),
+            onPressed: () {},
+          ),
         ],
       ),
     );

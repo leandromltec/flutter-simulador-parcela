@@ -10,6 +10,7 @@ import 'package:flutter_simulador_parcela/app/views/components/app_components/re
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:flutter_simulador_parcela/app/views/pvi/title_dropdown.dart';
+import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 
 class PVIScreen extends StatefulWidget {
   @override
@@ -111,15 +112,23 @@ class _PVIScreenState extends State<PVIScreen> {
           ),
         SizedBox(height: 40),
         Padding(
-          padding: const EdgeInsets.only(bottom: 50),
-          child: elevatedButton(
-              titleButton: 'Filtrar',
-              iconButton: Icons.search,
-              onPressedFunction: () {
-                //if (requiredNomeOperacional == true)
-                Navigator.of(context).pushNamed('/pvi/filtros');
-              }),
-        ),
+            padding: const EdgeInsets.only(bottom: 50),
+            child: Container(
+              width: 200,
+              height: 40,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/pvi/resultado');
+                },
+                icon: Icon(Icons.search),
+                label: Text(
+                  'Filtrar',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                style: ElevatedButton.styleFrom(
+                    primary: colorBackgroundElevatedButtonApp, elevation: 3),
+              ),
+            )),
       ],
     ));
   }

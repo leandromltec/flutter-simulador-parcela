@@ -30,8 +30,13 @@ dependencies:
   flutter_mobx: ^2.0.0
   dio: ^4.0.0
   geolocator: ^7.0.3
-  platform_maps_flutter: ^1.0.1
+  geocoding: ^2.0.0
+  location: ^4.1.1
+  #platform_maps_flutter: ^1.0.1
+  
+  map_launcher: ^2.0.0
   #auto_size_text: ^2.1.0
+  file_picker: ^3.0.1
   
 
 

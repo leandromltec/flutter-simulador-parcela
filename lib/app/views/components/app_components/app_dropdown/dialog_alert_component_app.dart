@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<void> openDialog(
+Future<bool> openDialog(
     {required BuildContext contextPage,
     required String tituloDialog,
     required String textoDialog}) async {
@@ -25,5 +25,5 @@ Future<void> openDialog(
             )
           ],
         );
-      });
+      }).then((value) => value != null ? true : false);
 }

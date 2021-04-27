@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platform_maps_flutter/platform_maps_flutter.dart';
+//import 'package:platform_maps_flutter/platform_maps_flutter.dart';
 
 class OpenMapPlatform extends StatefulWidget {
   final double latitude;
@@ -15,7 +15,7 @@ class _OpenMapPlatformState extends State<OpenMapPlatform> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PlatformMap(
+        /* body: PlatformMap(
         initialCameraPosition: CameraPosition(
           target: LatLng(widget.latitude, widget.longitude),
           zoom: 16.0,
@@ -29,7 +29,7 @@ class _OpenMapPlatformState extends State<OpenMapPlatform> {
         ]),
         mapType: MapType.satellite,
         compassEnabled: true,
-      ),
-    );
+      ),*/
+        );
   }
 }

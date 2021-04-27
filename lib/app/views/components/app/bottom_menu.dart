@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_simulador_parcela/app/views/components/app_components/app_dropdown/dialog_alert_component_app.dart';
+import 'package:geolocator/geolocator.dart';
 
 class BottomMenuNavigation extends StatelessWidget {
   @override
@@ -25,7 +29,21 @@ class BottomMenuNavigation extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.room),
-            onPressed: () {},
+            onPressed: () async {
+              bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+              if (!serviceEnabled) if (Platform.isAndroid) {
+                bool dialog = await openDialog(
+                    contextPage: context,
+                    tituloDialog: 'Ativar GPS',
+                    textoDialog:
+                        'Necessário ativar o GPS, você será redirecionado a configuração para ativa-lo.\n Em seguida, retorne ao aplicativo e tente novamente.');
+                if (dialog == false) {
+                  Geolocator.openLocationSettings();
+                }
+              }
+              if (serviceEnabled) Navigator.of(context).pushNamed('/map');
+            },
           ),
         ],
       ),

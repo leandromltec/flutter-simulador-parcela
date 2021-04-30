@@ -25,10 +25,6 @@ class BottomMenuNavigation extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.room),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.room),
             onPressed: () async {
               bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
@@ -43,6 +39,12 @@ class BottomMenuNavigation extends StatelessWidget {
                 }
               }
               if (serviceEnabled) Navigator.of(context).pushNamed('/map');
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.list_alt),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/equipment');
             },
           ),
         ],

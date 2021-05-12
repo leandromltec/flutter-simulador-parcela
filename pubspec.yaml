@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: 
+    sdk: flutter
   flutter_modular: ^3.0.1
   shared_preferences: ^2.0.5
   device_preview: ^0.7.1
@@ -32,11 +34,15 @@ dependencies:
   geolocator: ^7.0.3
   geocoding: ^2.0.0
   location: ^4.1.1
+  provider: ^5.0.0
   #platform_maps_flutter: ^1.0.1
   
   map_launcher: ^2.0.0
   #auto_size_text: ^2.1.0
   file_picker: ^3.0.1
+  date_field: ^2.0.1
+  
+  #flutter_datetime_picker: ^1.5.1
   
 
 

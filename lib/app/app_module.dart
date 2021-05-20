@@ -5,6 +5,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_simulador_parcela/app/app_widget.dart';
+import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
+
+import 'package:flutter_simulador_parcela/app/views/camera/camera_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/equipment/components_equipment/equipment_list_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/home/home_page.dart';
 import 'package:flutter_simulador_parcela/app/views/map/map_screen.dart';
@@ -24,6 +27,8 @@ class AppModule extends Module {
     ChildRoute('/pvi', child: (_, args) => PVIScreen()),
     ChildRoute('/pvi/resultado', child: (_, args) => PVIResultsFilterPVI()),
     ChildRoute('/pvi/time', child: (_, args) => PVITimeCourseScreen()),
+    ChildRoute('/camera', child: (_, args) => CameraScreen()),
+    ChildRoute("/camera/component", child: (_, args) => CameraComponent()),
   ];
 
   final Widget boostrap = AppWidget();

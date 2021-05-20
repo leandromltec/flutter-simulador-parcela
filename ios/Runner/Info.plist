@@ -66,5 +66,8 @@
 
 		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 		<string>This app needs access to location when open and in the background.</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Explanation on why the camera access is needed.</string>
+
 	</dict>
 </plist>

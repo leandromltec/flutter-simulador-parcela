@@ -20,8 +20,10 @@ class BottomMenuNavigation extends StatelessWidget {
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.calculate),
-            onPressed: () {},
+            icon: Icon(Icons.camera_alt),
+            onPressed: () {
+              Navigator.of(context).pushNamed('/camera');
+            },
           ),
           IconButton(
             icon: Icon(Icons.room),
@@ -50,10 +52,5 @@ class BottomMenuNavigation extends StatelessWidget {
         ],
       ),
     );
-    /*return BottomNavigationBar(items: [
-      BottomNavigationBarItem(icon: Icon(Icons.calculate), title: Text("PVI")),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.history), title: Text("Histórico")),
-    ]);*/
   }
 }

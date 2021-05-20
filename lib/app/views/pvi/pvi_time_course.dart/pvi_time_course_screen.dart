@@ -13,7 +13,7 @@ class PVITimeCourseScreen extends StatefulWidget {
 }
 
 class _PVITimeCourseScreenState extends State<PVITimeCourseScreen> {
-  double valueProgramado = 1;
+  double valueProgramado = 0;
   String textProgramado = "Normal";
 
   @override

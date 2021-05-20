@@ -12,6 +12,7 @@ import 'package:flutter_simulador_parcela/app/app_widget.dart';
 import 'package:flutter_simulador_parcela/app/app_module.dart';
 
 void main() {
+  //Garante que os serviços de plugins sejam inicializados
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(DevicePreview(

@@ -35,12 +35,16 @@ dependencies:
   geocoding: ^2.0.0
   location: ^4.1.1
   provider: ^5.0.0
+  
   #platform_maps_flutter: ^1.0.1
   
   map_launcher: ^2.0.0
   #auto_size_text: ^2.1.0
   file_picker: ^3.0.1
   date_field: ^2.0.1
+  camera:
+  path_provider:
+  path:
   
   #flutter_datetime_picker: ^1.5.1
   

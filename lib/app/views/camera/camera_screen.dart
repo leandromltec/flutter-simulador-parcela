@@ -9,8 +9,9 @@ import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 
 class CameraScreen extends StatefulWidget {
   final String? imagePath;
+  final String? menuId;
 
-  CameraScreen({this.imagePath});
+  CameraScreen({this.imagePath, this.menuId});
 
   @override
   _CameraScreenState createState() => _CameraScreenState();
@@ -30,45 +31,46 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return templatePage(
+        selectedItemMenuId: widget.menuId,
         columnSliverContentPage: Column(
-      children: [
-        titlePage("Fotografar Equipamento"),
-        dividerSession(),
-        if (widget.imagePath == null)
-          GestureDetector(
-            onTap: () async {
-              initializeCamera();
-              //Navigator.of(context).pushNamed('/camera/component');
-            },
-            child: Container(
-              margin: EdgeInsets.only(top: 20),
-              width: 300,
-              height: 300,
-              color: Colors.grey[300],
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.camera_alt,
-                    size: 50,
+          children: [
+            titlePage("Fotografar Equipamento"),
+            dividerSession(),
+            if (widget.imagePath == null)
+              GestureDetector(
+                onTap: () async {
+                  initializeCamera();
+                  //Navigator.of(context).pushNamed('/camera/component');
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: 20),
+                  width: 300,
+                  height: 300,
+                  color: Colors.grey[300],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.camera_alt,
+                        size: 50,
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        "Toque para tirar uma foto",
+                        style: TextStyle(fontSize: 16),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 20),
-                  Text(
-                    "Toque para tirar uma foto",
-                    style: TextStyle(fontSize: 16),
-                  )
-                ],
-              ),
-            ),
-          )
-        else
-          Container(
-            width: 300,
-            height: 300,
-            child: Image.file(File(widget.imagePath!)),
-          )
-      ],
-    ));
+                ),
+              )
+            else
+              Container(
+                width: 300,
+                height: 300,
+                child: Image.file(File(widget.imagePath!)),
+              )
+          ],
+        ));
   }
 }

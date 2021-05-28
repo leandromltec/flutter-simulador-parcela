@@ -10,6 +10,8 @@ abstract class _ControllerPviFiltros with Store {
   @observable
   ObservableFuture<List<ItemDropdDown>>? list;
 
+  List<ItemDropdDown> list2 = [];
+
   _ControllerPviFiltros() {
     print("teste");
   }
@@ -26,6 +28,9 @@ abstract class _ControllerPviFiltros with Store {
 
   @action
   loadItemsDropDown() {
-    list = getListItensDropDown().asObservable();
+    if (getListItensDropDown().asObservable().value == null) {
+      return list2.add(ItemDropdDown(id: '1', title: 'teste'));
+    } else
+      return list = getListItensDropDown().asObservable();
   }
 }

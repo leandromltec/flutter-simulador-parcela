@@ -6,23 +6,28 @@ class ButtonHomePages extends StatefulWidget {
   String subtitleButton;
   IconData iconButton;
   String namePage;
+  double heightHero;
 
   ButtonHomePages(
       {required this.titleButton,
       required this.subtitleButton,
       required this.iconButton,
-      required this.namePage});
+      required this.namePage,
+      required this.heightHero});
 
   @override
   _ButtonHomePagesState createState() => _ButtonHomePagesState();
 }
 
-class _ButtonHomePagesState extends State<ButtonHomePages> {
+//TickerProviderStateMixin - informa uma mudança de estado na animação
+class _ButtonHomePagesState extends State<ButtonHomePages>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.only(left: 40.0, top: 10, right: 40.0, bottom: 10),
         width: double.infinity,
+        height: widget.heightHero,
         child: Card(
           color: colorBackgroundButtonHome,
           child: InkWell(
@@ -39,6 +44,7 @@ class _ButtonHomePagesState extends State<ButtonHomePages> {
                     width: 60,
                     height: 60,
                     child: Container(
+                      height: widget.heightHero,
                       decoration: BoxDecoration(
                           color: colorBackgroundIcon,
                           borderRadius: BorderRadius.circular(50.0)),

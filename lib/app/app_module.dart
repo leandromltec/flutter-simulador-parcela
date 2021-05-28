@@ -15,19 +15,27 @@ import 'package:flutter_simulador_parcela/app/views/pvi/pvi_results_filter/pvi_r
 import 'package:flutter_simulador_parcela/app/views/pvi/pvi_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/pvi/pvi_time_course.dart/pvi_time_course_screen.dart';
 
+import 'controllers/pvi/pvi_filtros_controller.dart';
+import 'repositories/pvi/pvi_filtros_repositories.dart';
+
 class AppModule extends Module {
   @override
-  final List<Bind> binds = [];
+  final List<Bind> binds = [
+    Bind((i) => ControllerPviFiltros()),
+    Bind((i) => PVIFilterRepository()),
+  ];
 
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => HomePage()),
-    ChildRoute('/map', child: (_, args) => MapScreen()),
-    ChildRoute('/equipment', child: (_, args) => EquipmentListScreen()),
+    ChildRoute('/map/:menuId', child: (_, args) => MapScreen(menuId: args.params["menuId"])),
+    ChildRoute('/equipment/:menuId',
+        child: (_, args) =>
+            EquipmentListScreen(menuId: args.params["menuId"])),
     ChildRoute('/pvi', child: (_, args) => PVIScreen()),
     ChildRoute('/pvi/resultado', child: (_, args) => PVIResultsFilterPVI()),
     ChildRoute('/pvi/time', child: (_, args) => PVITimeCourseScreen()),
-    ChildRoute('/camera', child: (_, args) => CameraScreen()),
+    ChildRoute('/camera/:menuId', child: (_, args) => CameraScreen(menuId: args.params["menuId"])),
     ChildRoute("/camera/component", child: (_, args) => CameraComponent()),
   ];
 

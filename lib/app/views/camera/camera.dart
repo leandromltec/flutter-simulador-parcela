@@ -17,6 +17,8 @@ class _CameraComponentState extends State<CameraComponent> {
   CameraController? _cameraController;
   Future<void>? _initializeControllerFuture;
 
+  
+
   //CameraDescription? camera;
 
   /*Future<void> initializeCamera() async {

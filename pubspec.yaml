@@ -37,6 +37,9 @@ dependencies:
   provider: ^5.0.0
   #test: ^1.16.7
   #platform_maps_flutter: ^1.0.1
+  image_picker: ^0.7.5+3
+  #gallery_saver: ^2.1.0
+  image_gallery_saver: '^1.6.9'
   
   map_launcher: ^2.0.0
   #auto_size_text: ^2.1.0

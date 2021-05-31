@@ -6,10 +6,7 @@ part 'equipment_controller.g.dart';
 class EquimentController = _EquimentControllerBase with _$EquimentController;
 
 abstract class _EquimentControllerBase with Store {
-  @observable
-  /*ObservableList<EquipmentModel> listEquipment =
-      [EquipmentModel(titleEquipment: "Teste 1")].asObservable();*/
-
+ 
   @observable
   ObservableList<EquipmentModel> listEquipment =
       ObservableList<EquipmentModel>();

@@ -14,6 +14,11 @@ import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:path/path.dart' as path;
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+
+import 'package:open_file/open_file.dart';
 
 //https://pub.dev/packages/gallery_saver
 
@@ -30,6 +35,8 @@ class CameraScreen extends StatefulWidget {
 }
 
 class _CameraScreenState extends State<CameraScreen> {
+  final textFieldFocusNode = FocusNode();
+
   bool approvedPhoto = false;
 
   List<ItemDropdDown> lista = [
@@ -70,112 +77,159 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return templatePage(
         selectedItemMenuId: widget.menuId,
-        columnSliverContentPage: Column(
-          children: [
-            titlePage("Fotografar Equipamento"),
-            dividerSession(),
-            if (widget.imagePath == null)
-              GestureDetector(
-                onTap: () async {
-                  initializeCamera();
-                },
-                child: Container(
-                  margin: EdgeInsets.only(top: 20),
+        columnSliverContentPage: SingleChildScrollView(
+          //reverse: true,
+          child: Column(
+            children: [
+              titlePage("Fotografar Equipamento"),
+              dividerSession(),
+              if (widget.imagePath == null)
+                GestureDetector(
+                  onTap: () async {
+                    initializeCamera();
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(top: 20),
+                    width: 300,
+                    height: 300,
+                    color: Colors.grey[300],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.camera_alt,
+                          size: 50,
+                        ),
+                        SizedBox(height: 20),
+                        Text(
+                          "Toque para tirar uma foto",
+                          style: TextStyle(fontSize: 16),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              else
+                Container(
                   width: 300,
                   height: 300,
-                  color: Colors.grey[300],
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.camera_alt,
-                        size: 50,
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        "Toque para tirar uma foto",
-                        style: TextStyle(fontSize: 16),
-                      )
-                    ],
+                  child: Image.file(
+                    File(widget.imagePath!),
+                    fit: BoxFit.cover,
                   ),
                 ),
-              )
-            else
-              Container(
-                width: 300,
-                height: 300,
-                child: Image.file(
-                  File(widget.imagePath!),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            /*Container(
-                child: ElevatedButton(
-              child: Text("Salvar"),
-              onPressed: () {
-                _saveImageGallery();
-              },
-            ))*/
-            SizedBox(height: 10),
-            if (widget.imagePath != null && approvedPhoto == false)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 50,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        setState(() {
-                          approvedPhoto = true;
-                        });
-                      },
-                      label: Text("Sim, ficou boa"),
-                      icon: Icon(Icons.thumb_up),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        elevation: 3,
+              SizedBox(height: 10),
+              if (widget.imagePath != null && approvedPhoto == false)
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 50,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          setState(() {
+                            approvedPhoto = true;
+                            textFieldFocusNode.unfocus();
+                            textFieldFocusNode.canRequestFocus = false;
+                          });
+                        },
+                        label: Text("Sim, ficou boa"),
+                        icon: Icon(Icons.thumb_up),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          elevation: 3,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 20),
-                  Container(
-                    height: 50,
-                    child: ElevatedButton.icon(
-                      onPressed: () async {
-                        initializeCamera();
-                      },
-                      label: Text("Não, nova foto"),
-                      icon: Icon(Icons.thumb_down),
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.red, elevation: 3),
+                    SizedBox(width: 20),
+                    Container(
+                      height: 50,
+                      child: ElevatedButton.icon(
+                        onPressed: () async {
+                          initializeCamera();
+                        },
+                        label: Text("Não, nova foto"),
+                        icon: Icon(Icons.thumb_down),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.red, elevation: 3),
+                      ),
                     ),
-                  )
-                ],
-              ),
-            SizedBox(height: 20),
-            DropDownItems(
-              itemSelected: lista[0],
-              listItemsDropDown: lista,
-            ),
-            SizedBox(height: 20),
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10),
-                    hintStyle: TextStyle(color: Colors.black45),
-                    errorStyle: TextStyle(color: Colors.redAccent),
-                    border: OutlineInputBorder(),
-                    labelText: "Descrição"),
-                autofocus: true,
-                textAlign: TextAlign.center,
-                //controller: controller,
-                onChanged: (value) {},
-              ),
-            ),
-          ],
+                  ],
+                ),
+              SizedBox(height: 20),
+              if (widget.imagePath != null && approvedPhoto == true)
+                Column(
+                  children: [
+                    DropDownItems(
+                      itemSelected: lista[0],
+                      listItemsDropDown: lista,
+                    ),
+                    SizedBox(height: 20),
+                    Container(
+                      margin: EdgeInsets.only(left: 20, right: 20),
+                      child: TextFormField(
+                        autocorrect: true,
+
+                        focusNode: textFieldFocusNode,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 3,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(20),
+                            hintStyle: TextStyle(color: Colors.black45),
+                            errorStyle: TextStyle(color: Colors.redAccent),
+                            border: OutlineInputBorder(),
+                            labelText: "Descrição"),
+                        autofocus: true,
+                        textAlign: TextAlign.left,
+                        //controller: controller,
+                        onChanged: (value) {},
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 80),
+                      child: Container(
+                        height: 50,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            gerarPDF(context: context);
+                          },
+                          label: Text("Gera relatório em PDF"),
+                          icon: Icon(Icons.picture_as_pdf_rounded),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.blue,
+                            elevation: 3,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+            ],
+          ),
         ));
   }
+}
+
+Future<void> gerarPDF({required BuildContext context}) async {
+  //final dir = await syspaths.getExternalStorageDirectory();
+  Directory dir = await syspaths.getApplicationDocumentsDirectory();
+  final String path = "${dir.path}/example.pdf";
+  File file = File(path);
+
+  final pdf = pw.Document();
+
+  pdf.addPage(pw.Page(
+      pageFormat: PdfPageFormat.a4,
+      build: (pw.Context context) {
+        return pw.Text("Fazendo teste");
+      }));
+
+  file.writeAsBytesSync(await pdf.save());
+
+  await OpenFile.open(file.path);
+
+  //await Printing.sharePdf(bytes: await pdf.save(), filename: 'my-document.pdf');
 }

@@ -4,11 +4,14 @@ import 'package:flutter_simulador_parcela/app/views/components/app/button_home.d
 import 'package:flutter_simulador_parcela/app/views/components/app/sliverapp.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 
-Widget templatePage({required Widget columnSliverContentPage, String? selectedItemMenuId}) {
- 
+Widget templatePage(
+    {required Widget columnSliverContentPage, String? selectedItemMenuId}) {
   return Scaffold(
     backgroundColor: backgroundAppColor,
-    bottomNavigationBar: BottomMenuNavigation(selectedItemMenu: selectedItemMenuId,),
+    resizeToAvoidBottomInset: false,
+    bottomNavigationBar: BottomMenuNavigation(
+      selectedItemMenu: selectedItemMenuId,
+    ),
     floatingActionButton: HomeButton(),
     floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     body: CustomScrollView(

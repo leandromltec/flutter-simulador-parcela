@@ -1,10 +1,21 @@
-class Equipment {
-  String? name;
-  bool isDone;
+import 'package:mobx/mobx.dart';
 
-  Equipment({this.name, this.isDone = false});
+part 'equipment.g.dart';
 
-  void toggleDone() {
-    isDone = !isDone;
-  }
+class EquipmentModel = _EquipmentModelBase with _$EquipmentModel;
+
+abstract class _EquipmentModelBase with Store {
+  _EquipmentModelBase({this.titleEquipment, this.isDone = false});
+
+  @observable
+  String? titleEquipment;
+
+  @observable
+  bool? isDone;
+
+  @action
+  setTitle(String value) => titleEquipment = value;
+
+  @action
+  setCheck(bool value) => isDone = value;
 }

@@ -17,8 +17,6 @@ class _CameraComponentState extends State<CameraComponent> {
   CameraController? _cameraController;
   Future<void>? _initializeControllerFuture;
 
-  
-
   //CameraDescription? camera;
 
   /*Future<void> initializeCamera() async {
@@ -43,8 +41,7 @@ class _CameraComponentState extends State<CameraComponent> {
   void initState() {
     super.initState();
 
-    _cameraController =
-        CameraController(widget.camera!, ResolutionPreset.medium);
+    _cameraController = CameraController(widget.camera!, ResolutionPreset.high);
 
     _initializeControllerFuture = _cameraController!.initialize();
   }

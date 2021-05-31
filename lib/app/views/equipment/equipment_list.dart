@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_simulador_parcela/app/models/equipment/equipment.dart';
-import 'package:flutter_simulador_parcela/app/models/equipment/equipment_data.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_simulador_parcela/app/controllers/equipment/equipment_controller.dart';
 import 'package:flutter_simulador_parcela/app/views/equipment/components_equipment/equipment_tile.dart';
-import 'package:provider/provider.dart';
 
-class EquipmentList extends StatelessWidget {
+
+class EquipmentList extends StatefulWidget {
+  @override
+  _EquipmentListState createState() => _EquipmentListState();
+}
+
+class _EquipmentListState extends State<EquipmentList> {
+  final controllerEquipment = EquimentController();
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<EquipmentData>(builder: (context, equipmentData, child) {
+    return Observer(builder: (_) {
       return ListView.builder(
-          itemCount: equipmentData.listEquipmentCount,
+          itemCount: controllerEquipment.listEquipment.length,
           itemBuilder: (context, index) {
             return EquipmentTile(
-                isChecked: equipmentData.listEquipment[index].isDone,
-                equipmentTitle:
-                    equipmentData.listEquipment[index].name.toString(),
-                checkboxCallback: (checkBoxState) {
-                  /*  setState(() {
-                    Provider.of<EquipmentData>(context)
-                        .listEquipment[index]
-                        .toggleDone();
-                  }); */
-                });
+                itemEquipment: controllerEquipment.listEquipment[index]);
           });
     });
   }

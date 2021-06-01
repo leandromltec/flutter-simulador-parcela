@@ -42,6 +42,7 @@ dependencies:
   image_gallery_saver: '^1.6.9'
   pdf: ^3.3.0
   open_file: ^3.2.1
+  intl: ^0.17.0
   #flutter_full_pdf_viewer: ^1.0.6
   share: ^2.0.4
   printing: ^5.2.1

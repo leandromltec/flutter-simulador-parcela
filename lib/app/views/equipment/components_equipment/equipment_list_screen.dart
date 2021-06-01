@@ -8,6 +8,8 @@ import 'package:flutter_simulador_parcela/app/views/equipment/components_equipme
 import 'package:flutter_simulador_parcela/app/views/equipment/components_equipment/equipment_tile.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/intl_browser.dart';
 import 'package:share/share.dart';
 
 //https://pub.dev/packages/share
@@ -57,12 +59,28 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
                           elevation: 3,
                         ),
                         onPressed: () {
-                          final teste = "Teste 1";
+                          DateTime dateCurrent = DateTime.now();
+
+                          String list = "";
+
+                          list += "Tarefas cadastradas em " +
+                              DateFormat("'Data numérica', dd/MM/yyyy")
+                                  .format(dateCurrent) +
+                              "\n\n";
+                          for (EquipmentModel item
+                              in controllerEquipment.listEquipment) {
+                            list += item.titleEquipment.toString() + " - ";
+                            if (item.isDone == true)
+                              list += "Concluída\n";
+                            else
+                              list += "Em andamento\n";
+                          }
+
                           EquipmentModel tarefa =
-                              EquipmentModel(titleEquipment: "Teste novo");
+                              EquipmentModel(titleEquipment: "Tarefas");
                           final RenderBox box =
                               context.findRenderObject() as RenderBox;
-                          Share.share(teste,
+                          Share.share(list,
                               subject: tarefa.titleEquipment,
                               sharePositionOrigin:
                                   box.localToGlobal(Offset.zero) & box.size);

@@ -28,7 +28,10 @@ class EquipmentTile extends StatelessWidget {
                 style: TextStyle(
                     decoration: itemEquipment.isDone!
                         ? TextDecoration.lineThrough
-                        : null),
+                        : null,
+                    color: itemEquipment.isDone!
+                        ? Color(0XFF35ced4)
+                        : Colors.black),
               ),
               trailing: Checkbox(
                 activeColor: Colors.lightBlueAccent,

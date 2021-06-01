@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_simulador_parcela/app/models/equipment/equipment.dart';
 
+//https://flutter.dev/docs/release/breaking-changes/scaffold-messenger
+
 class EquipmentTile extends StatelessWidget {
   final EquipmentModel itemEquipment;
 
@@ -43,6 +45,7 @@ class EquipmentTile extends StatelessWidget {
                 onPressed: () {},
               ),
               duration: Duration(seconds: 5),
+              behavior: SnackBarBehavior.floating,
             );
             //Exibição do snack bar com a mensagem de tarefa excluída
             ScaffoldMessenger.of(context).showSnackBar(snackBar);

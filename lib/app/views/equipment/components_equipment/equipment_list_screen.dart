@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_simulador_parcela/app/controllers/equipment/equipment_controller.dart';
+import 'package:flutter_simulador_parcela/app/models/equipment/equipment.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
 import 'package:flutter_simulador_parcela/app/views/equipment/components_equipment/equipment_add.dart';
 import 'package:flutter_simulador_parcela/app/views/equipment/components_equipment/equipment_tile.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
+import 'package:share/share.dart';
+
+//https://pub.dev/packages/share
 
 class EquipmentListScreen extends StatefulWidget {
   String menuId;
@@ -33,17 +37,50 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
               titlePage("Tarefas"),
               dividerSession(),
               if (containsEquipment == true)
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  alignment: Alignment.centerLeft,
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    "* Deslize para esquerda para excluir uma tarefa",
-                    style: TextStyle(color: Colors.red, fontSize: 12.0),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      alignment: Alignment.centerLeft,
+                      width: 200,
+                      child: Text(
+                        "* Deslize para esquerda para\n excluir uma tarefa",
+                        style: TextStyle(color: Colors.red, fontSize: 12.0),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 20),
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(0XFF35ced4),
+                          elevation: 3,
+                        ),
+                        onPressed: () {
+                          final teste = "Teste 1";
+                          EquipmentModel tarefa =
+                              EquipmentModel(titleEquipment: "Teste novo");
+                          final RenderBox box =
+                              context.findRenderObject() as RenderBox;
+                          Share.share(teste,
+                              subject: tarefa.titleEquipment,
+                              sharePositionOrigin:
+                                  box.localToGlobal(Offset.zero) & box.size);
+                        },
+                        label: Text(
+                          "Compartilhar",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        icon: Icon(
+                          Icons.share,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Expanded(
                 child: Container(

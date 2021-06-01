@@ -9,7 +9,6 @@ import 'package:flutter_simulador_parcela/app/views/equipment/components_equipme
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/intl_browser.dart';
 import 'package:share/share.dart';
 
 //https://pub.dev/packages/share
@@ -61,26 +60,43 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
                         onPressed: () {
                           DateTime dateCurrent = DateTime.now();
 
-                          String list = "";
+                          String listTask = "";
 
-                          list += "Tarefas cadastradas em " +
-                              DateFormat("'Data numérica', dd/MM/yyyy")
-                                  .format(dateCurrent) +
+                          var listDone = controllerEquipment.listEquipment
+                              .where((item) => item.isDone == true)
+                              .toList();
+
+                          var listInProgress = controllerEquipment.listEquipment
+                              .where((item) => item.isDone == false);
+
+                          listTask += "Tarefas cadastradas em " +
+                              DateFormat("dd/MM/yyyy").format(dateCurrent) +
                               "\n\n";
-                          for (EquipmentModel item
-                              in controllerEquipment.listEquipment) {
-                            list += item.titleEquipment.toString() + " - ";
-                            if (item.isDone == true)
-                              list += "Concluída\n";
-                            else
-                              list += "Em andamento\n";
+
+                          if (listDone.length > 0) {
+                            listTask += "Tarefas Concluídas:\n";
+
+                            for (var itemDone in listDone) {
+                              listTask +=
+                                  itemDone.titleEquipment.toString() + "\n";
+                            }
+                          }
+
+                          if (listInProgress.length > 0) {
+                            listTask += "\nTarefas Em andamento:\n";
+
+                            for (var itemInProgress in listInProgress) {
+                              listTask +=
+                                  itemInProgress.titleEquipment.toString() +
+                                      "\n";
+                            }
                           }
 
                           EquipmentModel tarefa =
                               EquipmentModel(titleEquipment: "Tarefas");
                           final RenderBox box =
                               context.findRenderObject() as RenderBox;
-                          Share.share(list,
+                          Share.share(listTask,
                               subject: tarefa.titleEquipment,
                               sharePositionOrigin:
                                   box.localToGlobal(Offset.zero) & box.size);

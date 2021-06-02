@@ -92,12 +92,10 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
                             }
                           }
 
-                          EquipmentModel tarefa =
-                              EquipmentModel(titleEquipment: "Tarefas");
                           final RenderBox box =
                               context.findRenderObject() as RenderBox;
                           Share.share(listTask,
-                              subject: tarefa.titleEquipment,
+                              subject: "Tarefas",
                               sharePositionOrigin:
                                   box.localToGlobal(Offset.zero) & box.size);
                         },

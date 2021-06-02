@@ -13,13 +13,13 @@ mixin _$EquimentController on _EquimentControllerBase, Store {
       Atom(name: '_EquimentControllerBase.listEquipment');
 
   @override
-  ObservableList<EquipmentModel> get listEquipment {
+  ObservableList<dynamic> get listEquipment {
     _$listEquipmentAtom.reportRead();
     return super.listEquipment;
   }
 
   @override
-  set listEquipment(ObservableList<EquipmentModel> value) {
+  set listEquipment(ObservableList<dynamic> value) {
     _$listEquipmentAtom.reportWrite(value, super.listEquipment, () {
       super.listEquipment = value;
     });
@@ -29,7 +29,7 @@ mixin _$EquimentController on _EquimentControllerBase, Store {
       ActionController(name: '_EquimentControllerBase');
 
   @override
-  dynamic addEquipment(EquipmentModel equipmentItem) {
+  dynamic addEquipment(dynamic equipmentItem) {
     final _$actionInfo = _$_EquimentControllerBaseActionController.startAction(
         name: '_EquimentControllerBase.addEquipment');
     try {

@@ -1,6 +1,6 @@
 import 'package:flutter_simulador_parcela/app/interfaces/pvi/pvi_filtros_interface.dart';
 import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';
-import 'package:flutter_simulador_parcela/app/services/client_http_services.dart';
+import 'package:flutter_simulador_parcela/app/shared/services/client_http_services.dart';
 
 class PVIFilterRepository implements IPVIFilter {
   @override

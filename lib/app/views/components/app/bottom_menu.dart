@@ -51,7 +51,7 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
                           widget.selectedItemMenu = "1";
                         });
                         Navigator.of(context)
-                            .pushNamed('/Task/${widget.selectedItemMenu}');
+                            .pushNamed('/task/${widget.selectedItemMenu}');
                       },
                     ),
                   ),
@@ -175,7 +175,7 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
             child: Container(
               padding: EdgeInsets.all(2.0),
               decoration: BoxDecoration(
-                  color: widget.selectedItemMenu == "4"
+                  color: widget.selectedItemMenu == "5"
                       ? Colors.white
                       : Color(0xFF0084c7),
                   borderRadius: BorderRadius.circular(10.0)),
@@ -187,15 +187,17 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
                     child: IconButton(
                       icon: Icon(
                         Icons.info,
-                        color: widget.selectedItemMenu == "4"
+                        color: widget.selectedItemMenu == "5"
                             ? Color(0xFF0084c7)
                             : Colors.white,
                         size: 30,
                       ),
                       onPressed: () {
                         setState(() {
-                          widget.selectedItemMenu = "4";
+                          widget.selectedItemMenu = "5";
                         });
+                        Navigator.of(context)
+                            .pushNamed('/about/${widget.selectedItemMenu}');
                       },
                     ),
                   ),
@@ -203,7 +205,7 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
                       margin: EdgeInsets.only(bottom: 10),
                       child: Text("Sobre",
                           style: TextStyle(
-                              color: widget.selectedItemMenu == "4"
+                              color: widget.selectedItemMenu == "5"
                                   ? Color(0xFF0084c7)
                                   : Colors.white,
                               fontSize: 12)))
@@ -216,147 +218,3 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
     );
   }
 }
-
-
-
-/*class BottomMenuNavigation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BottomAppBar(
-      
-      color: Color(0xFF0084c7),
-      shape: CircularNotchedRectangle(),
-      notchMargin: 6.0,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0)),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    height: 40,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.calculate,
-                        color: Color(0xFF0084c7),
-                        size: 30,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(bottom: 10),
-                      child: Text("Ícone",
-                          style: TextStyle(
-                              color: Color(0xFF0084c7), fontSize: 12)))
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Container(
-               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0)),
-              margin: EdgeInsets.only(right: 40),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    height: 40,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.camera_alt,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/camera');
-                        
-                      },
-                    ),
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(bottom: 10),
-                      child: Text("Foto",
-                          style: TextStyle(color: Colors.white, fontSize: 12)))
-                ],
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 40),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  height: 40,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.room,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                    onPressed: () async {
-                      bool serviceEnabled =
-                          await Geolocator.isLocationServiceEnabled();
-
-                      if (!serviceEnabled) if (Platform.isAndroid) {
-                        bool dialog = await openDialog(
-                            contextPage: context,
-                            tituloDialog: 'Ativar GPS',
-                            textoDialog:
-                                'Necessário ativar o GPS, você será redirecionado a configuração para ativa-lo.\n Em seguida, retorne ao aplicativo e tente novamente.');
-                        if (dialog == false) {
-                          Geolocator.openLocationSettings();
-                        }
-                      }
-                      if (serviceEnabled)
-                        Navigator.of(context).pushNamed('/map');
-                    },
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    child: Text("Estação",
-                        style: TextStyle(color: Colors.white, fontSize: 12)))
-              ],
-            ),
-          ),
-          Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  height: 40,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.list_alt,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed('/Task');
-                    },
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    child: Text("Eq.",
-                        style: TextStyle(color: Colors.white, fontSize: 12)))
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}*/

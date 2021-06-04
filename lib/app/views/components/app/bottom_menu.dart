@@ -51,7 +51,7 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
                           widget.selectedItemMenu = "1";
                         });
                         Navigator.of(context)
-                            .pushNamed('/equipment/${widget.selectedItemMenu}');
+                            .pushNamed('/Task/${widget.selectedItemMenu}');
                       },
                     ),
                   ),
@@ -344,7 +344,7 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
                       size: 30,
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/equipment');
+                      Navigator.of(context).pushNamed('/Task');
                     },
                   ),
                 ),

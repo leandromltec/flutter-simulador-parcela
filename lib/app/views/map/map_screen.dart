@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_simulador_parcela/app/controllers/map/map_controller.dart';
 import 'package:flutter_simulador_parcela/app/models/map/currentLocation.dart';
-import 'package:flutter_simulador_parcela/app/services/geolocator_services.dart';
-import 'package:flutter_simulador_parcela/app/views/components/app_components/app_dropdown/dialog_alert_component_app.dart';
+import 'package:flutter_simulador_parcela/app/shared/services/geolocator_services.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:geolocator/geolocator.dart';
 

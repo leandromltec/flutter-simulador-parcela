@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_simulador_parcela/app/controllers/equipment/equipment_controller.dart';
-import 'package:flutter_simulador_parcela/app/models/equipment/equipment.dart';
+import 'package:flutter_simulador_parcela/app/controllers/task/task_controller.dart';
+import 'package:flutter_simulador_parcela/app/models/task/task.dart';
 
-class AddEquipmentScreen extends StatefulWidget {
-  final Function? addEquipmentCallBack;
+class AddTaskScreen extends StatefulWidget {
+  final Function? addTaskCallBack;
 
-  AddEquipmentScreen(this.addEquipmentCallBack);
+  AddTaskScreen(this.addTaskCallBack);
 
   @override
-  _AddEquipmentScreenState createState() => _AddEquipmentScreenState();
+  _AddTaskScreenState createState() => _AddTaskScreenState();
 }
 
-class _AddEquipmentScreenState extends State<AddEquipmentScreen> {
-  final controllerEquipment = EquimentController();
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  final controllerTask = TaskController();
 
-  var itemEquipment = EquipmentModel();
+  var itemTask = TaskModel();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class _AddEquipmentScreenState extends State<AddEquipmentScreen> {
                 autofocus: true,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
-                  itemEquipment.titleEquipment = value;
+                  itemTask.titleTask = value;
                 },
               ),
               SizedBox(height: 20),
@@ -68,7 +68,7 @@ class _AddEquipmentScreenState extends State<AddEquipmentScreen> {
                 child: ElevatedButton(
                     autofocus: true,
                     onPressed: () {
-                      widget.addEquipmentCallBack!(itemEquipment);
+                      widget.addTaskCallBack!(itemTask);
                       Navigator.pop(context);
                     },
                     child: Container(

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_simulador_parcela/app/controllers/equipment/equipment_controller.dart';
-import 'package:flutter_simulador_parcela/app/models/equipment/equipment.dart';
+import 'package:flutter_simulador_parcela/app/controllers/task/task_controller.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
-import 'package:flutter_simulador_parcela/app/views/equipment/components_equipment/equipment_add.dart';
-import 'package:flutter_simulador_parcela/app/views/equipment/components_equipment/equipment_tile.dart';
+import 'package:flutter_simulador_parcela/app/views/task/components_Task/Task_add.dart';
+import 'package:flutter_simulador_parcela/app/views/task/components_Task/Task_tile.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 import 'package:intl/intl.dart';
@@ -13,18 +12,18 @@ import 'package:share/share.dart';
 
 //https://pub.dev/packages/share
 
-class EquipmentListScreen extends StatefulWidget {
+class TaskListScreen extends StatefulWidget {
   String menuId;
-  EquipmentListScreen({required this.menuId});
+  TaskListScreen({required this.menuId});
 
   @override
-  _EquipmentListScreenState createState() => _EquipmentListScreenState();
+  _TaskListScreenState createState() => _TaskListScreenState();
 }
 
-class _EquipmentListScreenState extends State<EquipmentListScreen> {
-  final controllerEquipment = EquimentController();
+class _TaskListScreenState extends State<TaskListScreen> {
+  final controllerTask = TaskController();
 
-  bool containsEquipment = false;
+  bool containsTask = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
             children: [
               titlePage("Tarefas"),
               dividerSession(),
-              if (containsEquipment == true)
+              if (containsTask == true)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -62,11 +61,11 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
 
                           String listTask = "";
 
-                          var listDone = controllerEquipment.listEquipment
+                          var listDone = controllerTask.listTask
                               .where((item) => item.isDone == true)
                               .toList();
 
-                          var listInProgress = controllerEquipment.listEquipment
+                          var listInProgress = controllerTask.listTask
                               .where((item) => item.isDone == false);
 
                           listTask += "Tarefas cadastradas em " +
@@ -77,8 +76,7 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
                             listTask += "Tarefas Concluídas:\n";
 
                             for (var itemDone in listDone) {
-                              listTask +=
-                                  itemDone.titleEquipment.toString() + "\n";
+                              listTask += itemDone.titleTask.toString() + "\n";
                             }
                           }
 
@@ -87,8 +85,7 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
 
                             for (var itemInProgress in listInProgress) {
                               listTask +=
-                                  itemInProgress.titleEquipment.toString() +
-                                      "\n";
+                                  itemInProgress.titleTask.toString() + "\n";
                             }
                           }
 
@@ -125,7 +122,7 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
                       )),
                   child: Stack(
                     children: [
-                      if (containsEquipment == false)
+                      if (containsTask == false)
                         Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Container(
@@ -138,11 +135,10 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
                         ),
                       Observer(builder: (_) {
                         return ListView.builder(
-                            itemCount: controllerEquipment.listEquipment.length,
+                            itemCount: controllerTask.listTask.length,
                             itemBuilder: (_, index) {
-                              return EquipmentTile(
-                                  itemEquipment:
-                                      controllerEquipment.listEquipment[index]);
+                              return TaskTile(
+                                  itemTask: controllerTask.listTask[index]);
                             });
                       }),
                       Positioned(
@@ -167,17 +163,14 @@ class _EquipmentListScreenState extends State<EquipmentListScreen> {
                               onPressed: () {
                                 showModalBottomSheet(
                                     context: context,
-                                    builder: (_) =>
-                                        AddEquipmentScreen((itemEquipment) {
-                                          controllerEquipment
-                                              .addEquipment(itemEquipment);
+                                    builder: (_) => AddTaskScreen((itemTask) {
+                                          controllerTask.addTask(itemTask);
                                           setState(() {
-                                            if (controllerEquipment
-                                                    .listEquipment.length >
+                                            if (controllerTask.listTask.length >
                                                 0)
-                                              containsEquipment = true;
+                                              containsTask = true;
                                             else
-                                              containsEquipment = false;
+                                              containsTask = false;
                                           });
                                         }));
                               }),

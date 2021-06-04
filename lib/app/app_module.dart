@@ -8,7 +8,7 @@ import 'package:flutter_simulador_parcela/app/app_widget.dart';
 import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
 
 import 'package:flutter_simulador_parcela/app/views/camera/camera_screen.dart';
-import 'package:flutter_simulador_parcela/app/views/equipment/components_equipment/equipment_list_screen.dart';
+import 'package:flutter_simulador_parcela/app/views/Task/components_Task/Task_list_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/home/home_page.dart';
 import 'package:flutter_simulador_parcela/app/views/map/map_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/pvi/pvi_results_filter/pvi_results_filter_screen.dart';
@@ -28,14 +28,15 @@ class AppModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => HomePage()),
-    ChildRoute('/map/:menuId', child: (_, args) => MapScreen(menuId: args.params["menuId"])),
-    ChildRoute('/equipment/:menuId',
-        child: (_, args) =>
-            EquipmentListScreen(menuId: args.params["menuId"])),
+    ChildRoute('/map/:menuId',
+        child: (_, args) => MapScreen(menuId: args.params["menuId"])),
+    ChildRoute('/Task/:menuId',
+        child: (_, args) => TaskListScreen(menuId: args.params["menuId"])),
     ChildRoute('/pvi', child: (_, args) => PVIScreen()),
     ChildRoute('/pvi/resultado', child: (_, args) => PVIResultsFilterPVI()),
     ChildRoute('/pvi/time', child: (_, args) => PVITimeCourseScreen()),
-    ChildRoute('/camera/:menuId', child: (_, args) => CameraScreen(menuId: args.params["menuId"])),
+    ChildRoute('/camera/:menuId',
+        child: (_, args) => CameraScreen(menuId: args.params["menuId"])),
     ChildRoute("/camera/component", child: (_, args) => CameraComponent()),
   ];
 

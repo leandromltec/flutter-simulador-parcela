@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_simulador_parcela/app/models/equipment/equipment.dart';
+import 'package:flutter_simulador_parcela/app/models/task/task.dart';
 
 //https://flutter.dev/docs/release/breaking-changes/scaffold-messenger
 
-class EquipmentTile extends StatelessWidget {
-  final EquipmentModel itemEquipment;
+class TaskTile extends StatelessWidget {
+  final TaskModel itemTask;
 
-  EquipmentTile({required this.itemEquipment});
+  TaskTile({required this.itemTask});
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +24,17 @@ class EquipmentTile extends StatelessWidget {
               child: Icon(Icons.delete, color: Colors.white)),
           child: ListTile(
               title: Text(
-                itemEquipment.titleEquipment!,
+                itemTask.titleTask!,
                 style: TextStyle(
-                    decoration: itemEquipment.isDone!
-                        ? TextDecoration.lineThrough
-                        : null,
-                    color: itemEquipment.isDone!
-                        ? Color(0XFF35ced4)
-                        : Colors.black),
+                    decoration:
+                        itemTask.isDone! ? TextDecoration.lineThrough : null,
+                    color: itemTask.isDone! ? Color(0XFF35ced4) : Colors.black),
               ),
               trailing: Checkbox(
                 activeColor: Colors.lightBlueAccent,
-                value: itemEquipment.isDone!,
+                value: itemTask.isDone!,
                 onChanged: (valueChecked) {
-                  itemEquipment.setCheck(valueChecked!);
+                  itemTask.setCheck(valueChecked!);
                 },
               )),
           onDismissed: (direction) {

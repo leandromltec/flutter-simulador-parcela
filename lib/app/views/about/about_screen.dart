@@ -30,28 +30,21 @@ class _AboutScreenState extends State<AboutScreen> {
         selectedItemMenuId: widget.menuId,
         widgetMaster: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                child: Text("Simulador de Parcela Variável"),
-              ),
-              Container(
-                child: Text("App disponível para Android e IOS"),
-              ),
-              Container(
-                child: Text(
-                    "Aplicativo desenvolvido com objetivo de prestação de contas com ANEEL, caso haja atraso em serviços."),
-              ),
-              Container(
-                child: Text(
-                    "Irá atender profissionais da empresa Eletrobrás, que estarão atuando nas estações com os respectivos serviços."),
-              ),
-              Container(
-                child: Text("Tecnologia utilizada: Flutter"),
-              ),
-              Container(
-                child: Text(
-                    "Plataforma atual: " + Platform.operatingSystem.toString()),
-              ),
+              containerPage(textContent: "Simulador de Parcela Variável"),
+              containerPage(textContent: "App disponível para Android e IOS"),
+              containerPage(
+                  textContent:
+                      "Aplicativo desenvolvido com objetivo de prestação de contas com ANEEL, caso haja atraso em serviços."),
+              containerPage(
+                  textContent:
+                      "Irá atender profissionais da empresa Eletrobrás, que estarão atuando nas estações com os respectivos serviços."),
+              containerPage(textContent: "Tecnologia utilizada: Flutter"),
+              containerPage(
+                  textContent: "Plataforma atual: " +
+                      Platform.operatingSystem.toString()),
               if (package != null)
                 Container(
                   child: Text("Versão: " + package!.version),
@@ -59,6 +52,15 @@ class _AboutScreenState extends State<AboutScreen> {
             ],
           ),
         ));
+  }
+
+  Widget containerPage({required String textContent}) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+      alignment: Alignment.center,
+      child: Text(textContent),
+    );
   }
 
   Future<void> _packageInfo() async {

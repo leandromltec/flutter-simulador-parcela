@@ -40,7 +40,7 @@ class _PVIScreenState extends State<PVIScreen> {
     ];
 
     return templatePage(
-        columnSliverContentPage: Column(
+        widgetMaster: Column(
       children: [
         titlePage("Filtros PVI"),
         dividerSession(),

@@ -8,7 +8,7 @@ import 'package:flutter_simulador_parcela/app/app_widget.dart';
 import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
 
 import 'package:flutter_simulador_parcela/app/views/camera/camera_screen.dart';
-import 'package:flutter_simulador_parcela/app/views/Task/components_Task/Task_list_screen.dart';
+import 'package:flutter_simulador_parcela/app/views/task/task_list_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/home/home_page.dart';
 import 'package:flutter_simulador_parcela/app/views/map/map_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/pvi/pvi_results_filter/pvi_results_filter_screen.dart';

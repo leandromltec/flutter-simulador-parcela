@@ -19,7 +19,7 @@ class _PVITimeCourseScreenState extends State<PVITimeCourseScreen> {
   @override
   Widget build(BuildContext context) {
     return templatePage(
-        columnSliverContentPage: Column(
+        widgetMaster: Column(
       children: [
         titlePage("Período PVI"),
         dividerSession(),

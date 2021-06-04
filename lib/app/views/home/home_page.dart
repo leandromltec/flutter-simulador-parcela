@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return templatePage(
-        columnSliverContentPage: Column(
+        widgetMaster: Column(
       //crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Hero(
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return templatePage(
-        columnSliverContentPage: Column(
+        widgetMaster: Column(
       //crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         AnimatedContainer(

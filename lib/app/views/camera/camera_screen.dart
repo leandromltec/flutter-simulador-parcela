@@ -77,7 +77,7 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return templatePage(
         selectedItemMenuId: widget.menuId,
-        columnSliverContentPage: SingleChildScrollView(
+        widgetMaster: SingleChildScrollView(
           //reverse: true,
           child: Column(
             children: [

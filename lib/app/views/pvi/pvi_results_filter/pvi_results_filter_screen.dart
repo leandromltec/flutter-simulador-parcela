@@ -15,7 +15,7 @@ class _PVIResultsFilterPVIState extends State<PVIResultsFilterPVI> {
   @override
   Widget build(BuildContext context) {
     return templatePage(
-        columnSliverContentPage: Column(
+        widgetMaster: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         titlePage("Resultado filtros PVI"),

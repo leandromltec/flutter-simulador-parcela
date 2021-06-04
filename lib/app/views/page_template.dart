@@ -5,7 +5,7 @@ import 'package:flutter_simulador_parcela/app/views/components/app/sliverapp.dar
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 
 Widget templatePage(
-    {required Widget columnSliverContentPage, String? selectedItemMenuId}) {
+    {required Widget widgetMaster, String? selectedItemMenuId}) {
   return Scaffold(
     backgroundColor: backgroundAppColor,
     resizeToAvoidBottomInset: false,
@@ -18,7 +18,7 @@ Widget templatePage(
       slivers: <Widget>[
         AnimatedHeader(),
         SliverList(
-          delegate: SliverChildListDelegate(<Widget>[columnSliverContentPage]),
+          delegate: SliverChildListDelegate(<Widget>[widgetMaster]),
         )
       ],
     ),

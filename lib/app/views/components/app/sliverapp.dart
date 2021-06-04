@@ -32,7 +32,7 @@ class AnimatedHeader extends StatelessWidget {
   }
 }
 
-Widget sliverAnimatedHeader({required Column columnSliverContentPage}) {
+Widget sliverAnimatedHeader({required Column widgetMaster}) {
   return Scaffold(
     backgroundColor: backgroundAppColor,
     bottomNavigationBar: BottomMenuNavigation(),
@@ -42,7 +42,7 @@ Widget sliverAnimatedHeader({required Column columnSliverContentPage}) {
       slivers: <Widget>[
         AnimatedHeader(),
         SliverList(
-          delegate: SliverChildListDelegate(<Widget>[columnSliverContentPage]),
+          delegate: SliverChildListDelegate(<Widget>[widgetMaster]),
         )
       ],
     ),

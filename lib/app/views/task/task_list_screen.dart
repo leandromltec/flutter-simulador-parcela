@@ -3,8 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_simulador_parcela/app/controllers/task/task_controller.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
-import 'package:flutter_simulador_parcela/app/views/task/components_Task/Task_add.dart';
-import 'package:flutter_simulador_parcela/app/views/task/components_Task/Task_tile.dart';
+import 'package:flutter_simulador_parcela/app/views/task/task_add.dart';
+import 'package:flutter_simulador_parcela/app/views/task/task_tile.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 import 'package:intl/intl.dart';
@@ -29,7 +29,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
   Widget build(BuildContext context) {
     return templatePage(
         selectedItemMenuId: widget.menuId,
-        columnSliverContentPage: Container(
+        widgetMaster: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Column(

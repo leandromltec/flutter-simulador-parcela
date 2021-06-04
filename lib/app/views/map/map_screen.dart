@@ -31,7 +31,7 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return templatePage(
         selectedItemMenuId: widget.menuId,
-        columnSliverContentPage: Column(
+        widgetMaster: Column(
           children: [
             FutureBuilder(
                 future: _loadCurrentLocation(),

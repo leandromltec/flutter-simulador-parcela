@@ -1,12 +1,17 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_simulador_parcela/app/views/components/webview/webview_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 //https://api.flutter.dev/flutter/dart-io/Platform-class.html
 //https://pub.dev/packages/package_info
+//https://pub.dev/packages/webview_flutter
 
 class AboutScreen extends StatefulWidget {
   final String? menuId;
@@ -83,14 +88,43 @@ class _AboutScreenState extends State<AboutScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.data_usage),
-                      label: Text('Linkedin')),
-                  ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.data_usage),
-                      label: Text('Github'))
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WebViewScreen(
+                                    url:
+                                        "https://www.linkedin.com/in/leandro-loureiro-dev/")));
+                      },
+                      icon: Icon(FontAwesomeIcons.linkedin),
+                      label: Text('Linkedin'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue,
+                        elevation: 3,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WebViewScreen(
+                                    url: "https://github.com/leandromltec")));
+                      },
+                      icon: Icon(FontAwesomeIcons.github),
+                      label: Text('Github'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                        elevation: 3,
+                      ),
+                    ),
+                  )
                 ],
               )
             ],

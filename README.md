@@ -10,7 +10,7 @@ Foram criadas APIs de exemplo. Recursos como camêra, geolocalização e lista d
 O conhecimento para construção do app foi pesquisado na documentação oficial do Flutter, documentação Mobx e curso da instrutora oficial da Google Angela Yu.
 
 Links de pesquisas:
-https://flutter.dev/
+https://flutter.dev/ \
 https://pub.dev/packages/mobx
 https://mobx.js.org/README.html
 https://medium.com/flutter-comunidade-br/flutter-com-mobx-c0f4762fbd1a

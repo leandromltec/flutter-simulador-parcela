@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_simulador_parcela/app/controllers/pvi/pvi_controller.dart';
 import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';
 import 'package:flutter_simulador_parcela/app/shared/services/shared_local_service.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/app_dropdown/dropdown_required.dart';
@@ -17,7 +20,13 @@ class PVIScreen extends StatefulWidget {
 }
 
 class _PVIScreenState extends State<PVIScreen> {
+  final controllerDropDown = Modular.get<ControllerPVI>();
+
+  List<ItemDropdDown>? listManagement;
+
   var gerencia;
+
+  var itemSelectedManagement;
 
   bool requiredGerencia = false;
   bool requiredInstalacao = false;
@@ -28,15 +37,16 @@ class _PVIScreenState extends State<PVIScreen> {
   @override
   void initState() {
     _loadSelected();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     List<ItemDropdDown> lista = [
-      ItemDropdDown(id: '0', title: 'Selecione'),
-      ItemDropdDown(id: '1', title: 'Gerência 1'),
-      ItemDropdDown(id: '2', title: 'Gerência 2')
+      //ItemDropdDown(id: '0', title: 'Selecione'),
+      ItemDropdDown(id: '0', title: 'Gerência 1'),
+      ItemDropdDown(id: '1', title: 'Gerência 2')
     ];
 
     return templatePage(
@@ -57,11 +67,33 @@ class _PVIScreenState extends State<PVIScreen> {
             requiredAsterisk()
           ],
         ),
-        DropDownItems(
-          itemSelected: lista[0],
-          listItemsDropDown: lista,
-          keyStorage: 'gerencia',
-        ),
+        Observer(builder: (_) {
+          if (controllerDropDown.listItemsDropdDown!.value == null)
+            return CircularProgressIndicator();
+          else
+            return DropDownItems(
+              dropdownButton: DropdownButton(
+                hint: Text("Selecione"),
+                items: (controllerDropDown.listItemsDropdDown!.value!
+                    .map((ItemDropdDown e) {
+                  return DropdownMenuItem<ItemDropdDown>(
+                    child: Text(e.title!),
+                    value: e,
+                  );
+                }).toList()),
+                isExpanded: true,
+                onChanged: (dynamic? value) {
+                  setState(() {
+                    itemSelectedManagement = value;
+                    //widget.localStorage.put(widget.keyStorage, value.id);
+                    /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
+              widget.localStorage.put(widget.keyStorage, teste);*/
+                  });
+                },
+                value: itemSelectedManagement,
+              ),
+            );
+        }),
         if (requiredGerencia == true)
           RequiredInformationDropdown(
             iconeRequired: requiredAsterisk(),
@@ -77,8 +109,25 @@ class _PVIScreenState extends State<PVIScreen> {
           ],
         ),
         DropDownItems(
-          itemSelected: lista[0],
-          listItemsDropDown: lista,
+          dropdownButton: DropdownButton(
+            hint: Text("Selecione"),
+            items: (lista.map((ItemDropdDown e) {
+              return DropdownMenuItem<ItemDropdDown>(
+                child: Text(e.title!),
+                value: e,
+              );
+            }).toList()),
+            isExpanded: true,
+            onChanged: (dynamic? value) {
+              setState(() {
+                itemSelectedManagement = value;
+                //widget.localStorage.put(widget.keyStorage, value.id);
+                /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
+              widget.localStorage.put(widget.keyStorage, teste);*/
+              });
+            },
+            value: itemSelectedManagement,
+          ),
         ),
         if (requiredInstalacao == true)
           RequiredInformationDropdown(
@@ -95,13 +144,25 @@ class _PVIScreenState extends State<PVIScreen> {
           ],
         ),
         DropDownItems(
-          itemSelected: lista[0],
-          listItemsDropDown: lista,
-        ),
-        SizedBox(height: 15),
-        DropDownItems(
-          itemSelected: lista[0],
-          listItemsDropDown: lista,
+          dropdownButton: DropdownButton(
+            hint: Text("Selecione"),
+            items: (lista.map((ItemDropdDown e) {
+              return DropdownMenuItem<ItemDropdDown>(
+                child: Text(e.title!),
+                value: e,
+              );
+            }).toList()),
+            isExpanded: true,
+            onChanged: (dynamic? value) {
+              setState(() {
+                itemSelectedManagement = value;
+                //widget.localStorage.put(widget.keyStorage, value.id);
+                /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
+              widget.localStorage.put(widget.keyStorage, teste);*/
+              });
+            },
+            value: itemSelectedManagement,
+          ),
         ),
         if (requiredNomeOperacional == true)
           RequiredInformationDropdown(

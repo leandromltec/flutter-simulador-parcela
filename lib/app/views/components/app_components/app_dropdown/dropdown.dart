@@ -6,14 +6,15 @@ import 'package:flutter_simulador_parcela/app/shared/services/shared_local_servi
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 
 class DropDownItems extends StatefulWidget {
-  ItemDropdDown? itemSelected;
+  /*ItemDropdDown? itemSelected;
   List<ItemDropdDown> listItemsDropDown;
-  dynamic? keyStorage;
+  dynamic? keyStorage;*/
+
+  DropdownButton dropdownButton;
 
   SharedLocalStorage localStorage = new SharedLocalStorage();
 
-  DropDownItems(
-      {this.itemSelected, required this.listItemsDropDown, this.keyStorage});
+  DropDownItems({required this.dropdownButton});
 
   @override
   _DropDownItemsState createState() => _DropDownItemsState();
@@ -36,7 +37,8 @@ class _DropDownItemsState extends State<DropDownItems> {
       width: MediaQuery.of(context).size.width,
       height: 40,
       child: DropdownButtonHideUnderline(
-        child: DropdownButton(
+        child: widget.dropdownButton,
+        /*DropdownButton(
           items: widget.listItemsDropDown.map((ItemDropdDown e) {
             return DropdownMenuItem<ItemDropdDown>(
               child: Text(e.title!),
@@ -53,7 +55,7 @@ class _DropDownItemsState extends State<DropDownItems> {
             });
           },
           value: widget.itemSelected,
-        ),
+        ),*/
       ),
     );
   }

@@ -162,10 +162,10 @@ class _CameraScreenState extends State<CameraScreen> {
               if (widget.imagePath != null && approvedPhoto == true)
                 Column(
                   children: [
-                    DropDownItems(
+                    /*DropDownItems(
                       itemSelected: lista[0],
                       listItemsDropDown: lista,
-                    ),
+                    ),*/
                     SizedBox(height: 20),
                     Container(
                       margin: EdgeInsets.only(left: 20, right: 20),

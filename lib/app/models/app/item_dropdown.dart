@@ -11,8 +11,8 @@ class ItemDropdDown {
 
   ItemDropdDown.fromJson(Map<String, dynamic>? json) {
     if (json != null) {
-      id = json['id'].toString();
-      title = json['title'].toString();
+      id = json['_id'].toString();
+      title = json['titulo'].toString();
     }
   }
 }

@@ -89,9 +89,37 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           opacity: _visible ? 1.0 : 0.0,
           child: Center(
             child: Container(
-              width: 200,
-              height: 100,
-              color: Colors.red,
+              decoration: BoxDecoration(
+                  color: Color(0xFF0084c7),
+                  borderRadius: BorderRadius.circular(50.0)),
+              width: 160,
+              //height: 100,
+              child: Row(
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    child: Icon(
+                      Icons.help_outline_sharp,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Color(0XFF35ced4)),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    width: 100,
+                    child: Text(
+                      "Ajuda",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -99,4 +127,3 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ));
   }
 }
-

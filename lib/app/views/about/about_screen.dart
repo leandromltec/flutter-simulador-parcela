@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -85,6 +84,22 @@ class _AboutScreenState extends State<AboutScreen> {
               containerPage(widgetContent: Text("Leandro Loureiro")),
               containerPage(
                   widgetContent: Text("Analista Desenvolvedor Web e Mobile")),
+              Center(
+                  child: Container(
+                width: 100,
+                height: 40,
+                child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WebViewScreen(
+                                  url: "http://www.devleandro.com.br/")));
+                    },
+                    icon: Icon(Icons.web_sharp),
+                    label: Text("Site")),
+              )),
+              SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -102,7 +117,7 @@ class _AboutScreenState extends State<AboutScreen> {
                       icon: Icon(FontAwesomeIcons.linkedin),
                       label: Text('Linkedin'),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
+                        primary: Color(0XFF0a66c2),
                         elevation: 3,
                       ),
                     ),

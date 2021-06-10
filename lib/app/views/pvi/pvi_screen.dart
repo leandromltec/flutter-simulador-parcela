@@ -26,7 +26,10 @@ class _PVIScreenState extends State<PVIScreen> {
 
   var gerencia;
 
-  var itemSelectedManagement;
+  ItemDropdDown? itemSelectedManagement;
+  ItemDropdDown? itemSelectedInstalation;
+  ItemDropdDown? itemSelectedName;
+  ItemDropdDown? itemSelectedCode;
 
   bool requiredGerencia = false;
   bool requiredInstalacao = false;
@@ -54,7 +57,6 @@ class _PVIScreenState extends State<PVIScreen> {
       children: [
         titlePage("Filtros PVI"),
         dividerSession(),
-        
         messageField(
             icone: requiredAsterisk(),
             phraseInformationMessage: "Seleção obrigatória",
@@ -78,7 +80,7 @@ class _PVIScreenState extends State<PVIScreen> {
                   a.title!.toUpperCase().compareTo(b.title!.toUpperCase()));
 
             return DropDownItems(
-              dropdownButton: DropdownButton(
+              dropdownButton: DropdownButton<ItemDropdDown>(
                 hint: Text("Selecione"),
                 items: (listItemsDropdDown.map((ItemDropdDown e) {
                   return DropdownMenuItem<ItemDropdDown>(
@@ -87,7 +89,7 @@ class _PVIScreenState extends State<PVIScreen> {
                   );
                 }).toList()),
                 isExpanded: true,
-                onChanged: (dynamic? value) {
+                onChanged: (ItemDropdDown? value) {
                   setState(() {
                     itemSelectedManagement = value;
                     //widget.localStorage.put(widget.keyStorage, value.id);
@@ -115,7 +117,7 @@ class _PVIScreenState extends State<PVIScreen> {
           ],
         ),
         DropDownItems(
-          dropdownButton: DropdownButton(
+          dropdownButton: DropdownButton<ItemDropdDown>(
             hint: Text("Selecione uma gerênca para instalação"),
             items: (lista.map((ItemDropdDown e) {
               return DropdownMenuItem<ItemDropdDown>(
@@ -124,15 +126,15 @@ class _PVIScreenState extends State<PVIScreen> {
               );
             }).toList()),
             isExpanded: true,
-            onChanged: (dynamic? value) {
+            onChanged: (ItemDropdDown? value) {
               setState(() {
-                itemSelectedManagement = value;
+                itemSelectedInstalation = value;
                 //widget.localStorage.put(widget.keyStorage, value.id);
                 /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
               widget.localStorage.put(widget.keyStorage, teste);*/
               });
             },
-            value: itemSelectedManagement,
+            value: itemSelectedInstalation,
           ),
         ),
         if (requiredInstalacao == true)
@@ -150,7 +152,7 @@ class _PVIScreenState extends State<PVIScreen> {
           ],
         ),
         DropDownItems(
-          dropdownButton: DropdownButton(
+          dropdownButton: DropdownButton<ItemDropdDown>(
             hint: Text(
               "Selecione uma instalação para operacional",
               style: TextStyle(fontSize: 14),
@@ -162,20 +164,20 @@ class _PVIScreenState extends State<PVIScreen> {
               );
             }).toList()),
             isExpanded: true,
-            onChanged: (dynamic? value) {
+            onChanged: (ItemDropdDown? value) {
               setState(() {
-                itemSelectedManagement = value;
+                itemSelectedName = value;
                 //widget.localStorage.put(widget.keyStorage, value.id);
                 /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
               widget.localStorage.put(widget.keyStorage, teste);*/
               });
             },
-            value: itemSelectedManagement,
+            value: itemSelectedName,
           ),
         ),
         SizedBox(height: 10),
         DropDownItems(
-          dropdownButton: DropdownButton(
+          dropdownButton: DropdownButton<ItemDropdDown>(
             hint: Text("Selecione um operacional para código"),
             items: (lista.map((ItemDropdDown e) {
               return DropdownMenuItem<ItemDropdDown>(
@@ -184,15 +186,15 @@ class _PVIScreenState extends State<PVIScreen> {
               );
             }).toList()),
             isExpanded: true,
-            onChanged: (dynamic? value) {
+            onChanged: (ItemDropdDown? value) {
               setState(() {
-                itemSelectedManagement = value;
+                itemSelectedCode = value;
                 //widget.localStorage.put(widget.keyStorage, value.id);
                 /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
               widget.localStorage.put(widget.keyStorage, teste);*/
               });
             },
-            value: itemSelectedManagement,
+            value: itemSelectedCode,
           ),
         ),
         SizedBox(height: 40),

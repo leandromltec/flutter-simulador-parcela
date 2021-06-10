@@ -15,8 +15,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   AnimationController? _animationController;
   Animation? _animation;
 
-  AnimationController? _animationControllerHelp;
-  Animation? _animationHelp;
+  /*AnimationController? _animationControllerHelp;
+  Animation? _animationHelp;*/
 
   double heightHero = 0;
 
@@ -27,26 +27,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.initState();
 
     _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 6));
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
 
-    _animationControllerHelp =
-        AnimationController(vsync: this, duration: Duration(seconds: 8));
+    //_animationControllerHelp =
+    //AnimationController(vsync: this, duration: Duration(seconds: 8));
 
     _animation = CurvedAnimation(
         parent: _animationController!, curve: Curves.fastOutSlowIn);
 
-    _animationHelp =
-        CurvedAnimation(parent: _animationController!, curve: Curves.easeIn);
+    //_animationHelp =
+    CurvedAnimation(parent: _animationController!, curve: Curves.easeIn);
 
     _animationController!.forward();
 
-    _animationControllerHelp!.forward();
+    // _animationControllerHelp!.forward();
 
     _animationController!
       ..addListener(() {
         setState(() {
-          print(_animationController);
-          //heightHero = _animation!.value * 180;
+          print("valor " + _animationController!.value.toString());
         });
       });
 
@@ -75,12 +74,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             heightHero: _animation!.value * 180,
           ),
         ),
-        ButtonHomePages(
-          titleButton: "Histórico",
-          subtitleButton: "Visualize a última realização de cálculo",
-          iconButton: Icons.history,
-          namePage: "pvi",
-          heightHero: _animation!.value * 180,
+        Hero(
+          tag: 'tag1',
+          child: ButtonHomePages(
+            titleButton: "Histórico",
+            subtitleButton: "Visualize a última realização de cálculo",
+            iconButton: Icons.history,
+            namePage: "pvi",
+            heightHero: _animation!.value * 180,
+          ),
         ),
         SizedBox(height: 20),
         AnimatedOpacity(

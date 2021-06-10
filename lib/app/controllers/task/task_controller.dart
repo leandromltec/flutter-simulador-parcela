@@ -12,8 +12,8 @@ abstract class _TaskControllerBase with Store {
       ObservableList<TaskModel>();
 
   @action
-  addTask(TaskModel TaskItem) {
-    listTask.add(TaskItem);
-    print(listTask);
+  addTask(TaskModel taskItem) {
+    listTask.add(taskItem);
+  
   }
 }

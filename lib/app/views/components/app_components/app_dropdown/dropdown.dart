@@ -35,7 +35,7 @@ class _DropDownItemsState extends State<DropDownItems> {
                   color: borderColorDropDown),
               borderRadius: BorderRadius.all(Radius.circular(10)))),
       width: MediaQuery.of(context).size.width,
-      height: 40,
+      height: 45,
       child: DropdownButtonHideUnderline(
         child: widget.dropdownButton,
         /*DropdownButton(

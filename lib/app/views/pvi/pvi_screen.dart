@@ -54,6 +54,7 @@ class _PVIScreenState extends State<PVIScreen> {
       children: [
         titlePage("Filtros PVI"),
         dividerSession(),
+        
         messageField(
             icone: requiredAsterisk(),
             phraseInformationMessage: "Seleção obrigatória",
@@ -70,14 +71,18 @@ class _PVIScreenState extends State<PVIScreen> {
         Observer(builder: (_) {
           if (controllerDropDown.listItemsDropdDown!.value == null)
             return CircularProgressIndicator();
-          else
+          else {
+            List<ItemDropdDown> listItemsDropdDown = controllerDropDown
+                .listItemsDropdDown!.value!
+              ..sort((a, b) =>
+                  a.title!.toUpperCase().compareTo(b.title!.toUpperCase()));
+
             return DropDownItems(
               dropdownButton: DropdownButton(
                 hint: Text("Selecione"),
-                items: (controllerDropDown.listItemsDropdDown!.value!
-                    .map((ItemDropdDown e) {
+                items: (listItemsDropdDown.map((ItemDropdDown e) {
                   return DropdownMenuItem<ItemDropdDown>(
-                    child: Text(e.title!),
+                    child: Text(e.title!.toUpperCase()),
                     value: e,
                   );
                 }).toList()),
@@ -93,6 +98,7 @@ class _PVIScreenState extends State<PVIScreen> {
                 value: itemSelectedManagement,
               ),
             );
+          }
         }),
         if (requiredGerencia == true)
           RequiredInformationDropdown(
@@ -110,7 +116,7 @@ class _PVIScreenState extends State<PVIScreen> {
         ),
         DropDownItems(
           dropdownButton: DropdownButton(
-            hint: Text("Selecione"),
+            hint: Text("Selecione uma gerênca para instalação"),
             items: (lista.map((ItemDropdDown e) {
               return DropdownMenuItem<ItemDropdDown>(
                 child: Text(e.title!),
@@ -145,7 +151,10 @@ class _PVIScreenState extends State<PVIScreen> {
         ),
         DropDownItems(
           dropdownButton: DropdownButton(
-            hint: Text("Selecione"),
+            hint: Text(
+              "Selecione uma instalação para operacional",
+              style: TextStyle(fontSize: 14),
+            ),
             items: (lista.map((ItemDropdDown e) {
               return DropdownMenuItem<ItemDropdDown>(
                 child: Text(e.title!),
@@ -164,12 +173,28 @@ class _PVIScreenState extends State<PVIScreen> {
             value: itemSelectedManagement,
           ),
         ),
-        if (requiredNomeOperacional == true)
-          RequiredInformationDropdown(
-            iconeRequired: requiredAsterisk(),
-            validatorRequired: "Selecione uma operação",
-            colorValidatorRequired: Colors.red,
+        SizedBox(height: 10),
+        DropDownItems(
+          dropdownButton: DropdownButton(
+            hint: Text("Selecione um operacional para código"),
+            items: (lista.map((ItemDropdDown e) {
+              return DropdownMenuItem<ItemDropdDown>(
+                child: Text(e.title!),
+                value: e,
+              );
+            }).toList()),
+            isExpanded: true,
+            onChanged: (dynamic? value) {
+              setState(() {
+                itemSelectedManagement = value;
+                //widget.localStorage.put(widget.keyStorage, value.id);
+                /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
+              widget.localStorage.put(widget.keyStorage, teste);*/
+              });
+            },
+            value: itemSelectedManagement,
           ),
+        ),
         SizedBox(height: 40),
         Padding(
             padding: const EdgeInsets.only(bottom: 50),

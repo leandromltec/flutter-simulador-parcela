@@ -5,6 +5,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_simulador_parcela/app/app_widget.dart';
+import 'package:flutter_simulador_parcela/app/controllers/task/task_controller.dart';
 import 'package:flutter_simulador_parcela/app/views/about/about_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
 
@@ -24,6 +25,8 @@ class AppModule extends Module {
   final List<Bind> binds = [
     Bind((i) => ControllerPVI(repository: i.get<PVIRepository>())),
     Bind((i) => PVIRepository()),
+
+    Bind((i) => TaskController()),
   ];
 
   @override

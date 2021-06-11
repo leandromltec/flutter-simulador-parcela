@@ -14,7 +14,6 @@ import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 import 'package:intl/intl.dart';
 
-
 class TaskListScreen extends StatefulWidget {
   String menuId;
   TaskListScreen({required this.menuId});
@@ -134,12 +133,57 @@ class _TaskListScreenState extends State<TaskListScreen> {
                             ),
                           ),
                         ),
+                      if (containsTask == true)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20, bottom: 20),
+                          child: Container(
+                            child: Observer(builder: (_) {
+                              return Column(
+                                children: [
+                                  Row(
+                                   
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(
+                                        "Concluídas - ${controllerTask.taskFinisehd}",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        "Em andamento - ${controllerTask.taskFinisehd}",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Divider(
+                                    endIndent: 5,
+                                    height: 20,
+                                    thickness: 2,
+                                    color: Colors.grey[400],
+                                  ),
+                                ],
+                              );
+                            }),
+                          ),
+                        ),
                       Observer(builder: (_) {
                         return ListView.builder(
                             itemCount: controllerTask.listTask.length,
                             itemBuilder: (_, index) {
                               return TaskTile(
-                                  itemTask: controllerTask.listTask[index]);
+                                  itemTask: controllerTask.listTask[index],
+                                  removeTask: () {
+                                    controllerTask.removeTask(
+                                        controllerTask.listTask[index]);
+                                    setState(() {
+                                      if (controllerTask.listTask.length > 0)
+                                        containsTask = true;
+                                      else
+                                        containsTask = false;
+                                    });
+                                  });
                             });
                       }),
                       Positioned(

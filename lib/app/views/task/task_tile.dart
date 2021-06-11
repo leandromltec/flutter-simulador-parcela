@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_simulador_parcela/app/controllers/task/task_controller.dart';
 import 'package:flutter_simulador_parcela/app/models/task/task.dart';
 
 //https://flutter.dev/docs/release/breaking-changes/scaffold-messenger
@@ -7,7 +9,11 @@ import 'package:flutter_simulador_parcela/app/models/task/task.dart';
 class TaskTile extends StatelessWidget {
   final TaskModel itemTask;
 
-  TaskTile({required this.itemTask});
+  final Function removeTask;
+
+  TaskTile({required this.itemTask, required this.removeTask});
+
+  final controllerTask = Modular.get<TaskController>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +44,11 @@ class TaskTile extends StatelessWidget {
                 },
               )),
           onDismissed: (direction) {
+            removeTask();
             var snackBar = SnackBar(
               content: Text("Tarefa excluída"),
               action: SnackBarAction(
-                label: "Desfazer",
+                label: "",
                 onPressed: () {},
               ),
               duration: Duration(seconds: 5),

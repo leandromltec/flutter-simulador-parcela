@@ -1,7 +1,5 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';
 import 'package:flutter_simulador_parcela/app/shared/services/shared_local_service.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 

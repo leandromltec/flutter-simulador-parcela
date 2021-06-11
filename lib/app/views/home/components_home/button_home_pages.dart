@@ -19,12 +19,9 @@ class ButtonHomePages extends StatefulWidget {
   _ButtonHomePagesState createState() => _ButtonHomePagesState();
 }
 
-//TickerProviderStateMixin - informa uma mudança de estado na animação
+//TickerProviderStateMixin - informa mudança de estado na animação
 class _ButtonHomePagesState extends State<ButtonHomePages>
     with TickerProviderStateMixin {
- 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(

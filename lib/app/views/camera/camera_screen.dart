@@ -1,23 +1,19 @@
-import 'dart:convert';
+
 import 'dart:io';
-import 'dart:typed_data';
+
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';
 import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
-import 'package:flutter_simulador_parcela/app/views/components/app_components/app_dropdown/dropdown.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
-//import 'package:gallery_saver/gallery_saver.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+
 import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:path/path.dart' as path;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
-
 import 'package:open_file/open_file.dart';
 
 //https://pub.dev/packages/gallery_saver

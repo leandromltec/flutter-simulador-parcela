@@ -1,6 +1,11 @@
+/* Desenvolvido por Leandro M. Loureiro */
+/* GitHub https://github.com/leandromltec */
+/* Linkedin - https://www.linkedin.com/in/leandro-loureiro-dev/ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_simulador_parcela/app/controllers/task/task_controller.dart';
+import 'package:flutter_simulador_parcela/app/shared/services/share_item_service.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
 import 'package:flutter_simulador_parcela/app/views/task/task_add.dart';
@@ -8,9 +13,8 @@ import 'package:flutter_simulador_parcela/app/views/task/task_tile.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 import 'package:intl/intl.dart';
-import 'package:share/share.dart';
 
-//https://pub.dev/packages/share
+
 
 class TaskListScreen extends StatefulWidget {
   String menuId;
@@ -88,13 +92,11 @@ class _TaskListScreenState extends State<TaskListScreen> {
                                   itemInProgress.titleTask.toString() + "\n";
                             }
                           }
-
-                          final RenderBox box =
-                              context.findRenderObject() as RenderBox;
-                          Share.share(listTask,
-                              subject: "Tarefas",
-                              sharePositionOrigin:
-                                  box.localToGlobal(Offset.zero) & box.size);
+                          //Compartilha lista de Tarefas
+                          shareItem(
+                              context: context,
+                              item: listTask,
+                              subjectTitle: "Tarefas");
                         },
                         label: Text(
                           "Compartilhar",

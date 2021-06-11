@@ -1,11 +1,11 @@
-import 'package:date_field/date_field.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/checkbox_listtile.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/datetime_formfield.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
-import 'package:intl/intl.dart';
+
 
 class PVITimeCourseScreen extends StatefulWidget {
   @override

@@ -14,7 +14,7 @@ https://flutter.dev/ \
 https://pub.dev/packages/mobx \
 https://mobx.js.org/README.html \
 https://medium.com/flutter-comunidade-br/flutter-com-mobx-c0f4762fbd1a \
-https://www.udemy.com/course/flutter-bootcamp-with-dart/ \
+https://www.udemy.com/course/flutter-bootcamp-with-dart/ 
 
 
 Alguns pontos do projeto:

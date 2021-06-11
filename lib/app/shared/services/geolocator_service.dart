@@ -2,12 +2,10 @@
 /* GitHub https://github.com/leandromltec */
 /* Linkedin - https://www.linkedin.com/in/leandro-loureiro-dev/ */
 
-import 'dart:io';
-
 import 'package:flutter_simulador_parcela/app/models/map/currentLocation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:location/location.dart' as loc;
+
 
 //Documentação pesquisada
 //https://pub.dev/packages/geolocator
@@ -19,8 +17,7 @@ class LocationService {
     bool serviceEnabled;
     LocationPermission permission;
 
-    loc.Location location = loc.Location();
-
+    
     //Verifica se o serviço de localização está habilitado
     /*serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {

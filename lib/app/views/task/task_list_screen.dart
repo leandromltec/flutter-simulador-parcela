@@ -134,39 +134,38 @@ class _TaskListScreenState extends State<TaskListScreen> {
                           ),
                         ),
                       if (containsTask == true)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20, bottom: 20),
-                          child: Container(
-                            child: Observer(builder: (_) {
-                              return Column(
-                                children: [
-                                  Row(
-                                   
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(
-                                        "Concluídas - ${controllerTask.taskFinisehd}",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "Em andamento - ${controllerTask.taskFinisehd}",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                  Divider(
-                                    endIndent: 5,
-                                    height: 20,
-                                    thickness: 2,
-                                    color: Colors.grey[400],
-                                  ),
-                                ],
-                              );
-                            }),
-                          ),
+                        Container(
+                          margin: EdgeInsets.only(bottom: 20, top: 10),
+                          child: Observer(builder: (_) {
+                            return Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      "Concluídas - ${controllerTask.taskCompleted}",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0XFF35ced4)),
+                                    ),
+                                    Text(
+                                      "Em andamento - ${controllerTask.taskInProgress}",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                Divider(
+                                  endIndent: 15,
+                                  indent: 15,
+                                  height: 20,
+                                  thickness: 2,
+                                  color: Colors.grey[400],
+                                ),
+                              ],
+                            );
+                          }),
                         ),
                       Observer(builder: (_) {
                         return ListView.builder(

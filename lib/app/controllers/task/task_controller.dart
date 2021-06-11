@@ -15,7 +15,10 @@ abstract class _TaskControllerBase with Store {
   }
 
   @computed
-  int get taskFinisehd => listTask.where((item) => item.isDone == true).length;
+  int get taskCompleted => listTask.where((item) => item.isDone == true).length;
+
+   @computed
+  int get taskInProgress => listTask.where((item) => item.isDone == false).length;
 
   @action
   removeTask(TaskModel taskItem) {

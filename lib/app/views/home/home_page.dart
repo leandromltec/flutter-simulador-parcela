@@ -29,18 +29,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 3));
 
-    //_animationControllerHelp =
-    //AnimationController(vsync: this, duration: Duration(seconds: 8));
-
     _animation = CurvedAnimation(
         parent: _animationController!, curve: Curves.fastOutSlowIn);
 
-    //_animationHelp =
-    CurvedAnimation(parent: _animationController!, curve: Curves.easeIn);
-
     _animationController!.forward();
-
-    // _animationControllerHelp!.forward();
 
     _animationController!
       ..addListener(() {

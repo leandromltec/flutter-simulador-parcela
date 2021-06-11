@@ -15,7 +15,6 @@ import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 import 'package:intl/intl.dart';
 
 
-
 class TaskListScreen extends StatefulWidget {
   String menuId;
   TaskListScreen({required this.menuId});

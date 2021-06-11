@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_simulador_parcela/app/controllers/task/task_controller.dart';
 import 'package:flutter_simulador_parcela/app/models/task/task.dart';
 
@@ -56,12 +57,21 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               Text('Adicionar tarefa',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               SizedBox(height: 40),
-              TextFormField(
-                autofocus: true,
-                textAlign: TextAlign.center,
-                onChanged: (value) {
-                  itemTask.titleTask = value;
-                },
+              Container(
+                margin: EdgeInsets.only(left: 25, right: 25),
+                child: TextFormField(
+                  maxLength: 60,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                  decoration: InputDecoration(
+                    hintText: "Digite a tarefa (max. 60 caractéres)",
+                  ),
+                  keyboardType: TextInputType.text,
+                  autofocus: true,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    itemTask.titleTask = value;
+                  },
+                ),
               ),
               SizedBox(height: 20),
               Center(

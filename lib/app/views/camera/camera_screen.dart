@@ -1,7 +1,7 @@
-
+/* Desenvolvido por Leandro M. Loureiro */
+/* GitHub https://github.com/leandromltec */
+/* Linkedin - https://www.linkedin.com/in/leandro-loureiro-dev/ */
 import 'dart:io';
-
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';

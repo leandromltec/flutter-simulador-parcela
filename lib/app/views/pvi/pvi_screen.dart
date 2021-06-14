@@ -22,36 +22,42 @@ class PVIScreen extends StatefulWidget {
 class _PVIScreenState extends State<PVIScreen> {
   final controllerDropDown = Modular.get<ControllerPVI>();
 
-  List<ItemDropdDown>? listManagement;
+  var listItemDropDown;
 
   var gerencia;
 
+  List<ItemDropdDown> listInstallation = [];
+  List<ItemDropdDown> listOperationalName = [];
+  List<ItemDropdDown> listOperationalCode = [];
+
   ItemDropdDown? itemSelectedManagement;
-  ItemDropdDown? itemSelectedInstalation;
-  ItemDropdDown? itemSelectedName;
-  ItemDropdDown? itemSelectedCode;
+  ItemDropdDown? itemSelectedInstallation;
+  ItemDropdDown? itemSelectedOperationalName;
+  ItemDropdDown? itemSelectedOperationalCode;
+
+  String textHintInstallation = "Selecione uma gerênca para instalação";
+  String textHintOperationalName = "Selecione uma instalação para operacional";
+  String textHintOperationalCode = "Selecione uma operação para código";
 
   bool requiredGerencia = false;
   bool requiredInstalacao = false;
   bool requiredNomeOperacional = false;
 
+  bool loadingInstallation = false;
+  bool loadingOperationalName = false;
+  bool loadingOperationalCode = false;
+
   SharedLocalStorage localStorage = new SharedLocalStorage();
 
   @override
   void initState() {
-    _loadSelected();
+    //_loadSelected();
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<ItemDropdDown> lista = [
-      //ItemDropdDown(id: '0', title: 'Selecione'),
-      ItemDropdDown(id: '0', title: 'Gerência 1'),
-      ItemDropdDown(id: '1', title: 'Gerência 2')
-    ];
-
     return templatePage(
         widgetMaster: Column(
       children: [
@@ -70,31 +76,43 @@ class _PVIScreenState extends State<PVIScreen> {
             requiredAsterisk()
           ],
         ),
+        //Início DropDown Gerência
         Observer(builder: (_) {
           if (controllerDropDown.listItemsDropdDown!.value == null)
             return CircularProgressIndicator();
           else {
-            List<ItemDropdDown> listItemsDropdDown = controllerDropDown
+            List<ItemDropdDown> listItemsManagement = controllerDropDown
                 .listItemsDropdDown!.value!
               ..sort((a, b) =>
                   a.title!.toUpperCase().compareTo(b.title!.toUpperCase()));
-
             return DropDownItems(
               dropdownButton: DropdownButton<ItemDropdDown>(
                 hint: Text("Selecione"),
-                items: (listItemsDropdDown.map((ItemDropdDown e) {
+                items: (listItemsManagement.map((ItemDropdDown e) {
                   return DropdownMenuItem<ItemDropdDown>(
                     child: Text(e.title!.toUpperCase()),
                     value: e,
                   );
                 }).toList()),
                 isExpanded: true,
-                onChanged: (ItemDropdDown? value) {
+                onChanged: (ItemDropdDown? value) async {
                   setState(() {
+                    loadingInstallation = true;
                     itemSelectedManagement = value;
-                    //widget.localStorage.put(widget.keyStorage, value.id);
-                    /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
-              widget.localStorage.put(widget.keyStorage, teste);*/
+                  });
+                  await controllerDropDown
+                      .getListItensDropDown(endPoint: 'gerencia')
+                      .then((list) => listItemDropDown = list);
+
+                  setState(() {
+                    validateChildFiltersManagement();
+
+                    loadingInstallation = false;
+
+                    if (value!.id != "0" || value.id != null) {
+                      textHintInstallation = "Selecione";
+                      loadingInstallation = false;
+                    }
                   });
                 },
                 value: itemSelectedManagement,
@@ -102,10 +120,12 @@ class _PVIScreenState extends State<PVIScreen> {
             );
           }
         }),
+        //*Fim DropDown Gerência
+
         if (requiredGerencia == true)
           RequiredInformationDropdown(
             iconeRequired: requiredAsterisk(),
-            validatorRequired: "Selecione uma gerência",
+            validatorRequired: "Seleção obrigatória de gerência",
             colorValidatorRequired: Colors.red,
           ),
         SizedBox(height: 30),
@@ -116,31 +136,46 @@ class _PVIScreenState extends State<PVIScreen> {
             requiredAsterisk()
           ],
         ),
-        DropDownItems(
-          dropdownButton: DropdownButton<ItemDropdDown>(
-            hint: Text("Selecione uma gerênca para instalação"),
-            items: (lista.map((ItemDropdDown e) {
-              return DropdownMenuItem<ItemDropdDown>(
-                child: Text(e.title!),
-                value: e,
+
+        //Início DropdDown Instalação
+        Observer(
+          builder: (_) {
+            if (loadingInstallation == true)
+              return CircularProgressIndicator();
+            else
+              return DropDownItems(
+                dropdownButton: DropdownButton<ItemDropdDown>(
+                  hint: Text(textHintInstallation),
+                  items: (listInstallation.map((ItemDropdDown e) {
+                    return DropdownMenuItem<ItemDropdDown>(
+                      child: Text(e.title!),
+                      value: e,
+                    );
+                  }).toList()),
+                  isExpanded: true,
+                  onChanged: (ItemDropdDown? value) async {
+                    setState(() {
+                      loadingOperationalName = true;
+                      itemSelectedInstallation = value;
+                    });
+                    await controllerDropDown
+                        .getListItensDropDown(endPoint: 'gerencia')
+                        .then((list) => listItemDropDown = list);
+                    setState(() {
+                      validateChildFiltersInstallation();
+                      loadingOperationalName = false;
+                    });
+                  },
+                  value: itemSelectedInstallation,
+                ),
               );
-            }).toList()),
-            isExpanded: true,
-            onChanged: (ItemDropdDown? value) {
-              setState(() {
-                itemSelectedInstalation = value;
-                //widget.localStorage.put(widget.keyStorage, value.id);
-                /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
-              widget.localStorage.put(widget.keyStorage, teste);*/
-              });
-            },
-            value: itemSelectedInstalation,
-          ),
+          },
         ),
+        //Fim DropdDown Instalação
         if (requiredInstalacao == true)
           RequiredInformationDropdown(
             iconeRequired: requiredAsterisk(),
-            validatorRequired: "Selecione uma instalação",
+            validatorRequired: "Seleção obrigatória de instalação",
             colorValidatorRequired: Colors.red,
           ),
         SizedBox(height: 30),
@@ -151,52 +186,72 @@ class _PVIScreenState extends State<PVIScreen> {
             requiredAsterisk()
           ],
         ),
-        DropDownItems(
-          dropdownButton: DropdownButton<ItemDropdDown>(
-            hint: Text(
-              "Selecione uma instalação para operacional",
-              style: TextStyle(fontSize: 14),
-            ),
-            items: (lista.map((ItemDropdDown e) {
-              return DropdownMenuItem<ItemDropdDown>(
-                child: Text(e.title!),
-                value: e,
-              );
-            }).toList()),
-            isExpanded: true,
-            onChanged: (ItemDropdDown? value) {
-              setState(() {
-                itemSelectedName = value;
-                //widget.localStorage.put(widget.keyStorage, value.id);
-                /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
-              widget.localStorage.put(widget.keyStorage, teste);*/
-              });
-            },
-            value: itemSelectedName,
-          ),
-        ),
+        //Início DropDown Nome Operacional
+        Observer(builder: (_) {
+          if (loadingOperationalName == true)
+            return CircularProgressIndicator();
+          else
+            return DropDownItems(
+              dropdownButton: DropdownButton<ItemDropdDown>(
+                hint: Text(
+                  textHintOperationalName,
+                  style: TextStyle(fontSize: 14),
+                ),
+                items: (listOperationalName.map((ItemDropdDown e) {
+                  return DropdownMenuItem<ItemDropdDown>(
+                    child: Text(e.title!),
+                    value: e,
+                  );
+                }).toList()),
+                isExpanded: true,
+                onChanged: (ItemDropdDown? value) async {
+                  setState(() {
+                    loadingOperationalCode = true;
+                    itemSelectedOperationalName = value;
+                  });
+
+                  await controllerDropDown
+                      .getListItensDropDown(endPoint: 'gerencia')
+                      .then((list) => listItemDropDown = list);
+                  setState(() {
+                    listOperationalCode = listItemDropDown;
+                    loadingOperationalCode = false;
+                  });
+                },
+                value: itemSelectedOperationalName,
+              ),
+            );
+        }),
+        //Fim DropDown Nome Operacional
+
         SizedBox(height: 10),
-        DropDownItems(
-          dropdownButton: DropdownButton<ItemDropdDown>(
-            hint: Text("Selecione um operacional para código"),
-            items: (lista.map((ItemDropdDown e) {
-              return DropdownMenuItem<ItemDropdDown>(
-                child: Text(e.title!),
-                value: e,
-              );
-            }).toList()),
-            isExpanded: true,
-            onChanged: (ItemDropdDown? value) {
-              setState(() {
-                itemSelectedCode = value;
-                //widget.localStorage.put(widget.keyStorage, value.id);
-                /*String teste = jsonEncode(ItemDropdDown.fromJson(value));
-              widget.localStorage.put(widget.keyStorage, teste);*/
-              });
-            },
-            value: itemSelectedCode,
-          ),
-        ),
+
+        //Início DropDown Código Operacional
+        Observer(builder: (_) {
+          if (loadingOperationalCode == true)
+            return CircularProgressIndicator();
+          else
+            return DropDownItems(
+              dropdownButton: DropdownButton<ItemDropdDown>(
+                hint: Text(textHintOperationalCode),
+                items: (listOperationalCode.map((ItemDropdDown e) {
+                  return DropdownMenuItem<ItemDropdDown>(
+                    child: Text(e.title!),
+                    value: e,
+                  );
+                }).toList()),
+                isExpanded: true,
+                onChanged: (ItemDropdDown? value) async {
+                  setState(() {
+                    itemSelectedOperationalCode = value;
+                  });
+                },
+                value: itemSelectedOperationalCode,
+              ),
+            );
+        }),
+        //Fim DropDown Código Operacional
+
         SizedBox(height: 40),
         Padding(
             padding: const EdgeInsets.only(bottom: 50),
@@ -218,6 +273,30 @@ class _PVIScreenState extends State<PVIScreen> {
             )),
       ],
     ));
+  }
+
+  validateChildFiltersManagement() {
+    if (listInstallation.length > 0) {
+      listOperationalName = [];
+      listOperationalCode = [];
+
+      itemSelectedInstallation = null;
+      textHintInstallation = "Selecione";
+      textHintOperationalName = "Selecione uma instalação para operacional";
+      textHintOperationalCode = "Selecione uma operação para código";
+    } else {
+      listInstallation = listItemDropDown;
+    }
+  }
+
+  validateChildFiltersInstallation() {
+    if (listOperationalName.length > 0) {
+      listOperationalCode = [];
+      textHintOperationalCode = "Selecione uma operação para código";
+    } else {
+      listOperationalName = listItemDropDown;
+      textHintOperationalName = "Selecione";
+    }
   }
 
   void _loadSelected() async {

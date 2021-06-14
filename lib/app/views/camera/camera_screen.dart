@@ -48,10 +48,10 @@ class _CameraScreenState extends State<CameraScreen> {
     final listCameras = await availableCameras();
     final camera = listCameras.first;
 
-    final result = await Navigator.push(
+    /*final result = await Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => CameraComponent(camera: camera)));
+            builder: (context) => CameraComponent(camera: camera)));*/
   }
 
   void _saveImageGallery() async {

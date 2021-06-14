@@ -9,6 +9,7 @@ import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
 import 'package:flutter_simulador_parcela/app/views/page_template.dart';
+import 'package:intl/intl.dart';
 
 import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:path/path.dart' as path;
@@ -221,17 +222,29 @@ class _CameraScreenState extends State<CameraScreen> {
 Future<void> gerarPDF(
     {required BuildContext context, required String textDescription}) async {
   //final dir = await syspaths.getExternalStorageDirectory();
+
+  DateTime dateCurrent = DateTime.now();
+
   Directory dir = await syspaths.getApplicationDocumentsDirectory();
-  final String path = "${dir.path}/example.pdf";
+  final String path = "${dir.path}/equipamento-" +
+      DateFormat("dd-MM-yyyy").format(dateCurrent) +
+      ".pdf";
   File file = File(path);
 
   final pdf = pw.Document();
 
   pdf.addPage(pw.Page(
-      pageFormat: PdfPageFormat.a4,
-      build: (pw.Context context) {
-        return pw.Text(textDescription);
-      }));
+    pageFormat: PdfPageFormat.a4,
+    build: (pw.Context context) {
+      return pw.Column(children: [
+        pw.Padding(
+            padding: pw.EdgeInsets.only(bottom: 20),
+            child: pw.Text("Equipamento fotografado em " +
+                DateFormat("dd/MM/yyyy").format(dateCurrent))),
+        pw.Text(textDescription)
+      ]);
+    }, //return pw.Text(textDescription);
+  ));
 
   file.writeAsBytesSync(await pdf.save());
 

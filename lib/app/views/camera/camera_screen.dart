@@ -41,6 +41,8 @@ class _CameraScreenState extends State<CameraScreen> {
     ItemDropdDown(id: '2', title: 'EQ MODELO 3')
   ];
 
+  TextEditingController _controllerDescription = new TextEditingController();
+
   Future<void> initializeCamera() async {
     final listCameras = await availableCameras();
     final camera = listCameras.first;
@@ -74,7 +76,7 @@ class _CameraScreenState extends State<CameraScreen> {
     return templatePage(
         selectedItemMenuId: widget.menuId,
         widgetMaster: SingleChildScrollView(
-          //reverse: true,
+          reverse: true,
           child: Column(
             children: [
               titlePage("Fotografar Equipamento"),
@@ -165,22 +167,27 @@ class _CameraScreenState extends State<CameraScreen> {
                     SizedBox(height: 20),
                     Container(
                       margin: EdgeInsets.only(left: 20, right: 20),
-                      child: TextFormField(
-                        autocorrect: true,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: TextFormField(
+                          controller: _controllerDescription,
+                          autocorrect: true,
 
-                        focusNode: textFieldFocusNode,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 3,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(20),
-                            hintStyle: TextStyle(color: Colors.black45),
-                            errorStyle: TextStyle(color: Colors.redAccent),
-                            border: OutlineInputBorder(),
-                            labelText: "Descrição"),
-                        autofocus: true,
-                        textAlign: TextAlign.left,
-                        //controller: controller,
-                        onChanged: (value) {},
+                          focusNode: textFieldFocusNode,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 3,
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(20),
+                              hintStyle: TextStyle(color: Colors.black45),
+                              errorStyle: TextStyle(color: Colors.redAccent),
+                              border: OutlineInputBorder(),
+                              labelText: "Descrição"),
+                          autofocus: true,
+                          textAlign: TextAlign.left,
+                          //controller: controller,
+                          onChanged: (value) {},
+                        ),
                       ),
                     ),
                     SizedBox(height: 10),
@@ -190,7 +197,9 @@ class _CameraScreenState extends State<CameraScreen> {
                         height: 50,
                         child: ElevatedButton.icon(
                           onPressed: () {
-                            gerarPDF(context: context);
+                            gerarPDF(
+                                context: context,
+                                textDescription: _controllerDescription.text);
                           },
                           label: Text("Gera relatório em PDF"),
                           icon: Icon(Icons.picture_as_pdf_rounded),
@@ -209,7 +218,8 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 }
 
-Future<void> gerarPDF({required BuildContext context}) async {
+Future<void> gerarPDF(
+    {required BuildContext context, required String textDescription}) async {
   //final dir = await syspaths.getExternalStorageDirectory();
   Directory dir = await syspaths.getApplicationDocumentsDirectory();
   final String path = "${dir.path}/example.pdf";
@@ -220,7 +230,7 @@ Future<void> gerarPDF({required BuildContext context}) async {
   pdf.addPage(pw.Page(
       pageFormat: PdfPageFormat.a4,
       build: (pw.Context context) {
-        return pw.Text("Fazendo teste");
+        return pw.Text(textDescription);
       }));
 
   file.writeAsBytesSync(await pdf.save());

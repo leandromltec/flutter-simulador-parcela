@@ -286,6 +286,7 @@ class _PVIScreenState extends State<PVIScreen> {
 
   validateChildFiltersManagement() {
     if (listInstallation.length > 0) {
+      
       listOperationalName = [];
       listOperationalCode = [];
 
@@ -293,6 +294,8 @@ class _PVIScreenState extends State<PVIScreen> {
       textHintInstallation = "Selecione";
       textHintOperationalName = "Selecione uma instalação para operacional";
       textHintOperationalCode = "Selecione uma operação para código";
+
+      
     } else {
       listInstallation = listItemDropDown;
     }

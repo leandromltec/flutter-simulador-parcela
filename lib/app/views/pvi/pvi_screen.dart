@@ -163,7 +163,12 @@ class _PVIScreenState extends State<PVIScreen> {
                         .then((list) => listItemDropDown = list);
                     setState(() {
                       validateChildFiltersInstallation();
-                      loadingOperationalName = false;
+
+                      if (value!.id != "0" || value.id != null) {
+                        textHintOperationalName = "Selecione";
+                        itemSelectedOperationalName = null;
+                        loadingOperationalName = false;
+                      }
                     });
                   },
                   value: itemSelectedInstallation,
@@ -214,6 +219,10 @@ class _PVIScreenState extends State<PVIScreen> {
                       .getListItensDropDown(endPoint: 'gerencia')
                       .then((list) => listItemDropDown = list);
                   setState(() {
+                    if (value!.id != "0" || value.id != null) {
+                      textHintOperationalCode = "Selecione";
+                      itemSelectedOperationalCode = null;
+                    }
                     listOperationalCode = listItemDropDown;
                     loadingOperationalCode = false;
                   });
@@ -295,7 +304,6 @@ class _PVIScreenState extends State<PVIScreen> {
       textHintOperationalCode = "Selecione uma operação para código";
     } else {
       listOperationalName = listItemDropDown;
-      textHintOperationalName = "Selecione";
     }
   }
 

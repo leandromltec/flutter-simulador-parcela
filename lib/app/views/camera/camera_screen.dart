@@ -1,6 +1,8 @@
 /* Desenvolvido por Leandro M. Loureiro */
 /* GitHub https://github.com/leandromltec */
 /* Linkedin - https://www.linkedin.com/in/leandro-loureiro-dev/ */
+
+import 'dart:convert';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,8 @@ import 'package:path/path.dart' as path;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:open_file/open_file.dart';
+
+//https://pub.dev/packages/pdf
 
 //https://pub.dev/packages/gallery_saver
 
@@ -48,10 +52,10 @@ class _CameraScreenState extends State<CameraScreen> {
     final listCameras = await availableCameras();
     final camera = listCameras.first;
 
-    /*final result = await Navigator.push(
+    await Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => CameraComponent(camera: camera)));*/
+            builder: (context) => CameraComponent(camera: camera)));
   }
 
   void _saveImageGallery() async {
@@ -200,7 +204,8 @@ class _CameraScreenState extends State<CameraScreen> {
                           onPressed: () {
                             gerarPDF(
                                 context: context,
-                                textDescription: _controllerDescription.text);
+                                textDescription: _controllerDescription.text,
+                                imagePath: widget.imagePath!);
                           },
                           label: Text("Gera relatório em PDF"),
                           icon: Icon(Icons.picture_as_pdf_rounded),
@@ -220,18 +225,23 @@ class _CameraScreenState extends State<CameraScreen> {
 }
 
 Future<void> gerarPDF(
-    {required BuildContext context, required String textDescription}) async {
-  //final dir = await syspaths.getExternalStorageDirectory();
-
+    {required BuildContext context,
+    required String textDescription,
+    required String imagePath}) async {
   DateTime dateCurrent = DateTime.now();
 
   Directory dir = await syspaths.getApplicationDocumentsDirectory();
-  final String path = "${dir.path}/equipamento-" +
+
+  final String pathName = "${dir.path}/equipamento-" +
       DateFormat("dd-MM-yyyy").format(dateCurrent) +
       ".pdf";
-  File file = File(path);
+  File file = File(pathName);
 
   final pdf = pw.Document();
+
+  final image = pw.MemoryImage(
+    File(imagePath).readAsBytesSync(),
+  );
 
   pdf.addPage(pw.Page(
     pageFormat: PdfPageFormat.a4,
@@ -241,6 +251,11 @@ Future<void> gerarPDF(
             padding: pw.EdgeInsets.only(bottom: 20),
             child: pw.Text("Equipamento fotografado em " +
                 DateFormat("dd/MM/yyyy").format(dateCurrent))),
+        pw.Container(
+          width: 200,
+          height: 200,
+          child: pw.Image(image),
+        ),
         pw.Text(textDescription)
       ]);
     }, //return pw.Text(textDescription);
@@ -252,3 +267,5 @@ Future<void> gerarPDF(
 
   //await Printing.sharePdf(bytes: await pdf.save(), filename: 'my-document.pdf');
 }
+
+class Uint8List {}

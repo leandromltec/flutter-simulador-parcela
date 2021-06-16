@@ -20,10 +20,6 @@ import 'package:open_file/open_file.dart';
 
 //https://pub.dev/packages/pdf
 
-//https://pub.dev/packages/gallery_saver
-
-//https://pub.dev/packages/image_gallery_saver
-
 class CameraScreen extends StatefulWidget {
   final String? imagePath;
   final String? menuId;
@@ -37,10 +33,12 @@ class CameraScreen extends StatefulWidget {
 class _CameraScreenState extends State<CameraScreen> {
   final textFieldFocusNode = FocusNode();
 
-  bool approvedPhoto = false;
+  //Variável recebe valor de aprovação da foto (foto boa ou ruim)
+  bool _approvedPhoto = false;
 
   TextEditingController _controllerDescription = new TextEditingController();
 
+  //Função inícia o componente de câmera
   Future<void> initializeCamera() async {
     final listCameras = await availableCameras();
     final camera = listCameras.first;
@@ -49,24 +47,6 @@ class _CameraScreenState extends State<CameraScreen> {
         context,
         MaterialPageRoute(
             builder: (context) => CameraComponent(camera: camera)));
-  }
-
-  void _saveImageGallery() async {
-    File? _storedImage = File(widget.imagePath!);
-
-    final imageDir = await syspaths.getApplicationDocumentsDirectory();
-    String fileName = path.basename(_storedImage.path);
-
-    await _storedImage.copy('${imageDir.path}/$fileName');
-
-    //String testeUlr = '${imageDir.path}/$fileName'.split('.')[0];
-
-    ///Uint8List bytes = base64.decode('${imageDir.path}/$fileName');
-
-    /*File file = File(widget.imagePath!);
-    await file.writeAsBytes(bytes);*/
-
-    //await ImageGallerySaver.saveImage(bytes);
   }
 
   @override
@@ -82,6 +62,7 @@ class _CameraScreenState extends State<CameraScreen> {
               if (widget.imagePath == null)
                 GestureDetector(
                   onTap: () async {
+                    //Chamada da função de câmera
                     initializeCamera();
                   },
                   child: Container(
@@ -116,7 +97,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   ),
                 ),
               SizedBox(height: 10),
-              if (widget.imagePath != null && approvedPhoto == false)
+              if (widget.imagePath != null && _approvedPhoto == false)
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +107,7 @@ class _CameraScreenState extends State<CameraScreen> {
                       child: ElevatedButton.icon(
                         onPressed: () {
                           setState(() {
-                            approvedPhoto = true;
+                            _approvedPhoto = true;
                             textFieldFocusNode.unfocus();
                             textFieldFocusNode.canRequestFocus = false;
                           });
@@ -155,7 +136,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   ],
                 ),
               SizedBox(height: 20),
-              if (widget.imagePath != null && approvedPhoto == true)
+              if (widget.imagePath != null && _approvedPhoto == true)
                 Column(
                   children: [
                     /*DropDownItems(
@@ -195,7 +176,7 @@ class _CameraScreenState extends State<CameraScreen> {
                         height: 50,
                         child: ElevatedButton.icon(
                           onPressed: () {
-                            gerarPDF(
+                            generatePDF(
                                 context: context,
                                 textDescription: _controllerDescription.text,
                                 imagePath: widget.imagePath!);
@@ -217,26 +198,32 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 }
 
-Future<void> gerarPDF(
+Future<void> generatePDF(
     {required BuildContext context,
     required String textDescription,
     required String imagePath}) async {
-  DateTime dateCurrent = DateTime.now();
-
-  var device = await getDeviceInfo();
-
+  //Diretório do dispositivo que armazena o caminho do arquivo pdf gerado
   Directory dir = await syspaths.getApplicationDocumentsDirectory();
 
+  //Nome do arquivo em pdf que será composto da data atual
+  DateTime dateCurrent = DateTime.now();
   final String pathName = "${dir.path}/equipamento-" +
       DateFormat("dd-MM-yyyy").format(dateCurrent) +
       ".pdf";
+
+  //Gera o arquivo com o nome referenciado na variável pathName
   File file = File(pathName);
 
+  //Defini um novo documento em pdf
   final pdf = pw.Document();
 
+  //Variável recebe a imagem (através do seu caminho) lido em bytes
   final image = pw.MemoryImage(
     File(imagePath).readAsBytesSync(),
   );
+
+  //Informações do dispostivo
+  var deviceInfo = await getDeviceInfo();
 
   pdf.addPage(pw.Page(
     pageFormat: PdfPageFormat.a4,
@@ -252,9 +239,9 @@ Future<void> gerarPDF(
           padding: pw.EdgeInsets.only(bottom: 20),
           child: pw.Container(
               child: pw.Text("Fotografado pelo dispositivo - " +
-                  device['manufacturer'].toString().toUpperCase() +
+                  deviceInfo['manufacturer'].toString().toUpperCase() +
                   " " +
-                  device['device'].toString().toUpperCase())),
+                  deviceInfo['device'].toString().toUpperCase())),
         ),
         pw.Center(
             child: pw.Container(
@@ -274,10 +261,14 @@ Future<void> gerarPDF(
     },
   ));
 
+  //Salva o arquivo pdf no caminho do diretório
   file.writeAsBytesSync(await pdf.save());
+
+  //Abre o arquivo em pdf gerado
   await OpenFile.open(file.path);
 }
 
+//Container criado para inclusão de textos abaixo da imagem, referente ao equipamento
 pw.Container containerTextPDF({required String childText, bool? bold}) {
   return pw.Container(
     alignment: pw.Alignment.centerLeft,

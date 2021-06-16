@@ -2,11 +2,9 @@
 /* GitHub https://github.com/leandromltec */
 /* Linkedin - https://www.linkedin.com/in/leandro-loureiro-dev/ */
 
-import 'dart:convert';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';
 import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
@@ -39,12 +37,6 @@ class _CameraScreenState extends State<CameraScreen> {
   final textFieldFocusNode = FocusNode();
 
   bool approvedPhoto = false;
-
-  List<ItemDropdDown> lista = [
-    ItemDropdDown(id: '0', title: 'EQ MODELO 1'),
-    ItemDropdDown(id: '1', title: 'EQ MODELO 2'),
-    ItemDropdDown(id: '2', title: 'EQ MODELO 3')
-  ];
 
   TextEditingController _controllerDescription = new TextEditingController();
 
@@ -259,16 +251,29 @@ Future<void> gerarPDF(
           height: 250,
           child: pw.Image(image, fit: pw.BoxFit.cover),
         )),
-        pw.Text(textDescription)
+        pw.SizedBox(height: 20),
+        containerTextPDF(
+            childText: "Equipamento avalidado por : Leandro Loureiro"),
+        containerTextPDF(childText: "Matrícula : TS3050"),
+        pw.SizedBox(height: 20),
+        containerTextPDF(childText: "Descrição", bold: true),
+        pw.SizedBox(height: 10),
+        containerTextPDF(childText: textDescription),
       ]);
-    }, //return pw.Text(textDescription);
+    },
   ));
 
   file.writeAsBytesSync(await pdf.save());
-
   await OpenFile.open(file.path);
-
-  //await Printing.sharePdf(bytes: await pdf.save(), filename: 'my-document.pdf');
 }
 
-class Uint8List {}
+pw.Container containerTextPDF({required String childText, bool? bold}) {
+  return pw.Container(
+    alignment: pw.Alignment.centerLeft,
+    child: pw.Text(childText,
+        style: pw.TextStyle(
+            fontSize: 14.0,
+            fontWeight:
+                bold == true ? pw.FontWeight.bold : pw.FontWeight.normal)),
+  );
+}

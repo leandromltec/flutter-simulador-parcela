@@ -5,6 +5,7 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_simulador_parcela/app/shared/services/device_info_service.dart';
 import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/title_pages.dart';
@@ -222,6 +223,8 @@ Future<void> gerarPDF(
     required String imagePath}) async {
   DateTime dateCurrent = DateTime.now();
 
+  var device = await getDeviceInfo();
+
   Directory dir = await syspaths.getApplicationDocumentsDirectory();
 
   final String pathName = "${dir.path}/equipamento-" +
@@ -245,6 +248,7 @@ Future<void> gerarPDF(
                 "Equipamento fotografado em " +
                     DateFormat("dd/MM/yyyy").format(dateCurrent),
                 style: pw.TextStyle(fontSize: 16.0))),
+        //pw.Container(child: pw.Text("Fotografado por - " + device)),
         pw.Center(
             child: pw.Container(
           width: 250,

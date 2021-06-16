@@ -248,14 +248,17 @@ Future<void> gerarPDF(
     build: (pw.Context context) {
       return pw.Column(children: [
         pw.Padding(
-            padding: pw.EdgeInsets.only(bottom: 20),
-            child: pw.Text("Equipamento fotografado em " +
-                DateFormat("dd/MM/yyyy").format(dateCurrent))),
-        pw.Container(
-          width: 200,
-          height: 200,
-          child: pw.Image(image),
-        ),
+            padding: pw.EdgeInsets.only(bottom: 40),
+            child: pw.Text(
+                "Equipamento fotografado em " +
+                    DateFormat("dd/MM/yyyy").format(dateCurrent),
+                style: pw.TextStyle(fontSize: 16.0))),
+        pw.Center(
+            child: pw.Container(
+          width: 250,
+          height: 250,
+          child: pw.Image(image, fit: pw.BoxFit.cover),
+        )),
         pw.Text(textDescription)
       ]);
     }, //return pw.Text(textDescription);

@@ -35,7 +35,7 @@ Map<String, dynamic> _getInfoDataAndroid(AndroidDeviceInfo build) {
 
 Map<String, dynamic> _getInfoDataIOS(IosDeviceInfo build) {
   return <String, dynamic>{
-    'name': build.name,
-    'model': build.model,
+    'device': build.name,
+    'manufacturer': build.model,
   };
 }

@@ -9,7 +9,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool changeSuffixIcon = true;
 
-  IconData? suffixIcon;
+  bool obscureText = true;
+
+  IconData? suffixIcon = FontAwesomeIcons.eye;
+
+  TextEditingController controllerLogin = new TextEditingController();
+  TextEditingController controllerPassword = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,106 +34,116 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             textFormFieldLogin(
                 context: context,
+                formKey: "Login",
+                controller: controllerLogin,
                 labelText: "Digite seu e-mail",
                 keyboardType: TextInputType.emailAddress,
-                obscureTextPassword: false,
                 prefixIcon: FontAwesomeIcons.userAlt),
             textFormFieldLogin(
-                context: context,
-                labelText: "Digite sua senha",
-                keyboardType: TextInputType.text,
-                obscureTextPassword: true,
-                prefixIcon: FontAwesomeIcons.key,
-                suffixIcon: suffixIcon,
-                suffixIconFuncion: () {
-                  setState(() {
-                    changeSuffixIcon = !changeSuffixIcon;
-
-                    if (changeSuffixIcon == true)
-                      suffixIcon = FontAwesomeIcons.eye;
-                    else
-                      suffixIcon = FontAwesomeIcons.eyeSlash;
-                  });
-                }),
+              context: context,
+              controller: controllerPassword,
+              formKey: "Senha",
+              labelText: "Digite sua senha",
+              keyboardType: TextInputType.text,
+              prefixIcon: FontAwesomeIcons.key,
+              constaisSuffixIcon: true,
+            ),
           ],
         ),
       ),
     );
   }
-}
 
-Widget textFormFieldLogin(
-    {required BuildContext context,
+  Widget textFormFieldLogin({
+    required BuildContext context,
+    required String formKey,
+    required TextEditingController controller,
     required String labelText,
     required TextInputType keyboardType,
     required IconData prefixIcon,
-    IconData? suffixIcon,
-    Function? suffixIconFuncion,
-    required bool obscureTextPassword}) {
-  return Container(
-    height: 100,
-    width: MediaQuery.of(context).size.width,
-    color: Colors.transparent,
-    margin: EdgeInsets.only(left: 20, right: 20),
-    padding: EdgeInsets.all(5),
-    child: TextFormField(
-      obscureText: obscureTextPassword,
-      keyboardType: TextInputType.text,
-      style: TextStyle(
-        color: Colors.white,
-      ),
-      decoration: InputDecoration(
-          prefixIcon: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Color(0xFF0084c7)),
-              child: Icon(
-                prefixIcon,
-                size: 25,
-                color: Colors.white,
+    bool? constaisSuffixIcon,
+  }) {
+    return Container(
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      color: Colors.transparent,
+      margin: EdgeInsets.only(left: 20, right: 20),
+      padding: EdgeInsets.all(5),
+      child: TextFormField(
+        key: Key(formKey),
+        controller: controller,
+        obscureText: formKey == "Senha" ? obscureText : false,
+        keyboardType: TextInputType.text,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+        decoration: InputDecoration(
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Color(0xFF0084c7)),
+                child: Icon(
+                  prefixIcon,
+                  size: 25,
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
-          suffixIcon: suffixIcon != null
-              ? GestureDetector(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Color(0xFF0084c7)),
-                      child: Icon(
-                        suffixIcon,
-                        size: 20,
-                        color: Colors.white,
+            suffixIcon: constaisSuffixIcon != null
+                ? GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (controller.text.isNotEmpty) {
+                          changeSuffixIcon = !changeSuffixIcon;
+
+                          if (changeSuffixIcon == true) {
+                            obscureText = true;
+                            suffixIcon = FontAwesomeIcons.eye;
+                          } else {
+                            obscureText = false;
+                            suffixIcon = FontAwesomeIcons.eyeSlash;
+                          }
+                        }
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Color(0xFF0084c7)),
+                        child: Icon(
+                          suffixIcon,
+                          size: 20,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                )
-              : null,
-          fillColor: Color(0XFF35ced4),
-          filled: true,
-          contentPadding: EdgeInsets.all(20),
-          hintStyle: TextStyle(color: Color(0xFF0084c7)),
-          focusColor: Color(0xFF0084c7),
-          errorStyle: TextStyle(color: Colors.redAccent),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xFF0084c7)),
-            borderRadius: BorderRadius.all(Radius.circular(50)),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xFF0084c7)),
-            borderRadius: BorderRadius.all(Radius.circular(50)),
-          ),
-          labelStyle: TextStyle(color: Colors.white),
-          labelText: labelText),
-    ),
-  );
+                  )
+                : null,
+            fillColor: Color(0XFF35ced4),
+            filled: true,
+            contentPadding: EdgeInsets.all(20),
+            hintStyle: TextStyle(color: Color(0xFF0084c7)),
+            focusColor: Color(0xFF0084c7),
+            errorStyle: TextStyle(color: Colors.redAccent),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFF0084c7)),
+              borderRadius: BorderRadius.all(Radius.circular(50)),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFF0084c7)),
+              borderRadius: BorderRadius.all(Radius.circular(50)),
+            ),
+            labelStyle: TextStyle(color: Colors.white),
+            labelText: labelText),
+      ),
+    );
+  }
 }

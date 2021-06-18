@@ -25,11 +25,15 @@ class _LoginScreenState extends State<LoginScreen> {
             textFormFieldLogin(
                 context: context,
                 labelText: "Digite seu e-mail",
-                obscureTextPassword: false),
+                keyboardType: TextInputType.emailAddress,
+                obscureTextPassword: false,
+                prefixIcon: Icons.account_circle_rounded),
             textFormFieldLogin(
                 context: context,
                 labelText: "Digite sua senha",
-                obscureTextPassword: true),
+                keyboardType: TextInputType.text,
+                obscureTextPassword: true,
+                prefixIcon: Icons.account_circle_rounded),
           ],
         ),
       ),
@@ -40,6 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
 Widget textFormFieldLogin(
     {required BuildContext context,
     required String labelText,
+    required TextInputType keyboardType,
+    required IconData prefixIcon,
+    IconData? suffixIcon,
     required bool obscureTextPassword}) {
   return Container(
     height: 100,
@@ -54,13 +61,24 @@ Widget textFormFieldLogin(
         color: Colors.white,
       ),
       decoration: InputDecoration(
+          prefixIcon: Icon(
+            prefixIcon,
+            size: 50,
+            color: Colors.white,
+          ),
+          suffixIcon: Icon(suffixIcon),
           fillColor: Color(0XFF35ced4),
           filled: true,
           contentPadding: EdgeInsets.all(20),
-          hintStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: Color(0xFF0084c7)),
+          focusColor: Color(0xFF0084c7),
           errorStyle: TextStyle(color: Colors.redAccent),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFF0084c7)),
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+          ),
           border: OutlineInputBorder(
-            borderSide: BorderSide.none,
+            borderSide: BorderSide(color: Color(0xFF0084c7)),
             borderRadius: BorderRadius.all(Radius.circular(50)),
           ),
           labelStyle: TextStyle(color: Colors.white),

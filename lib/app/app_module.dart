@@ -10,6 +10,7 @@ import 'package:flutter_simulador_parcela/app/views/about/about_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
 
 import 'package:flutter_simulador_parcela/app/views/camera/camera_screen.dart';
+import 'package:flutter_simulador_parcela/app/views/login/login_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/task/task_list_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/home/home_page.dart';
 import 'package:flutter_simulador_parcela/app/views/map/map_screen.dart';
@@ -25,13 +26,13 @@ class AppModule extends Module {
   final List<Bind> binds = [
     Bind((i) => ControllerPVI(repository: i.get<PVIRepository>())),
     Bind((i) => PVIRepository()),
-
     Bind((i) => TaskController()),
   ];
 
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => HomePage()),
+    ChildRoute('/login', child: (_, args) => LoginScreen()),
     ChildRoute('/map/:menuId',
         child: (_, args) => MapScreen(menuId: args.params["menuId"])),
     ChildRoute('/task/:menuId',

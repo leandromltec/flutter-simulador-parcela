@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -27,13 +28,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 labelText: "Digite seu e-mail",
                 keyboardType: TextInputType.emailAddress,
                 obscureTextPassword: false,
-                prefixIcon: Icons.account_circle_rounded),
+                prefixIcon: FontAwesomeIcons.userAlt),
             textFormFieldLogin(
                 context: context,
                 labelText: "Digite sua senha",
                 keyboardType: TextInputType.text,
                 obscureTextPassword: true,
-                prefixIcon: Icons.account_circle_rounded),
+                prefixIcon: FontAwesomeIcons.key,
+                suffixIcon: FontAwesomeIcons.eye),
           ],
         ),
       ),
@@ -63,10 +65,14 @@ Widget textFormFieldLogin(
       decoration: InputDecoration(
           prefixIcon: Icon(
             prefixIcon,
-            size: 50,
+            size: 25,
             color: Colors.white,
           ),
-          suffixIcon: Icon(suffixIcon),
+          suffixIcon: Icon(
+            suffixIcon,
+            size: 25,
+            color: Colors.white,
+          ),
           fillColor: Color(0XFF35ced4),
           filled: true,
           contentPadding: EdgeInsets.all(20),

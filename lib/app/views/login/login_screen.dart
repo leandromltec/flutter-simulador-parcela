@@ -7,6 +7,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool changeSuffixIcon = true;
+
+  IconData? suffixIcon;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +39,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 keyboardType: TextInputType.text,
                 obscureTextPassword: true,
                 prefixIcon: FontAwesomeIcons.key,
-                suffixIcon: FontAwesomeIcons.eye),
+                suffixIcon: suffixIcon,
+                suffixIconFuncion: () {
+                  setState(() {
+                    changeSuffixIcon = !changeSuffixIcon;
+
+                    if (changeSuffixIcon == true)
+                      suffixIcon = FontAwesomeIcons.eye;
+                    else
+                      suffixIcon = FontAwesomeIcons.eyeSlash;
+                  });
+                }),
           ],
         ),
       ),
@@ -49,6 +63,7 @@ Widget textFormFieldLogin(
     required TextInputType keyboardType,
     required IconData prefixIcon,
     IconData? suffixIcon,
+    Function? suffixIconFuncion,
     required bool obscureTextPassword}) {
   return Container(
     height: 100,
@@ -63,16 +78,41 @@ Widget textFormFieldLogin(
         color: Colors.white,
       ),
       decoration: InputDecoration(
-          prefixIcon: Icon(
-            prefixIcon,
-            size: 25,
-            color: Colors.white,
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Color(0xFF0084c7)),
+              child: Icon(
+                prefixIcon,
+                size: 25,
+                color: Colors.white,
+              ),
+            ),
           ),
-          suffixIcon: Icon(
-            suffixIcon,
-            size: 25,
-            color: Colors.white,
-          ),
+          suffixIcon: suffixIcon != null
+              ? GestureDetector(
+                  onTap: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Color(0xFF0084c7)),
+                      child: Icon(
+                        suffixIcon,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
+              : null,
           fillColor: Color(0XFF35ced4),
           filled: true,
           contentPadding: EdgeInsets.all(20),

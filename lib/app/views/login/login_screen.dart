@@ -13,6 +13,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   IconData? suffixIcon = FontAwesomeIcons.eye;
 
+  bool isLoading = false;
+
+  String textButtonAcess = "Entrar";
+
   TextEditingController controllerLogin = new TextEditingController();
   TextEditingController controllerPassword = new TextEditingController();
 
@@ -48,6 +52,51 @@ class _LoginScreenState extends State<LoginScreen> {
               prefixIcon: FontAwesomeIcons.key,
               constaisSuffixIcon: true,
             ),
+            SizedBox(height: 20),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isLoading = true;
+
+                  textButtonAcess = "Aguarde...";
+                });
+              },
+              child: Container(
+                height: 60,
+                margin: EdgeInsets.only(left: 50, right: 50),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Color(0XFF35ced4)),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      margin: EdgeInsets.only(left: 10),
+                      child:  
+                      Icon(
+                        FontAwesomeIcons.signInAlt,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Color(0xFF0084c7)),
+                    ),
+                    Container(
+                        width: 200,
+                        child: Center(
+                            child: Text(
+                          textButtonAcess,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        )))
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

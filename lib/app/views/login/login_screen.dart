@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen>
               labelText: "Digite sua senha",
               keyboardType: TextInputType.text,
               prefixIcon: FontAwesomeIcons.key,
-              constaisSuffixIcon: true,
+              constainsSuffixIcon: true,
             ),
             SizedBox(height: 20),
             GestureDetector(
@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen>
     required String labelText,
     required TextInputType keyboardType,
     required IconData prefixIcon,
-    bool? constaisSuffixIcon,
+    bool? constainsSuffixIcon,
   }) {
     return Container(
       height: 100,
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen>
                 ),
               ),
             ),
-            suffixIcon: constaisSuffixIcon != null
+            suffixIcon: constainsSuffixIcon != null
                 ? GestureDetector(
                     onTap: () {
                       setState(() {

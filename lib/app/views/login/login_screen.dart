@@ -23,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen>
   bool _visible = false;
 
   Color colorButtonEnter = Colors.white;
+  Color textButtonEnter = Color(0xFF0084c7);
 
   TextEditingController controllerLogin = new TextEditingController();
   TextEditingController controllerPassword = new TextEditingController();
@@ -86,61 +87,18 @@ class _LoginScreenState extends State<LoginScreen>
             ),
             SizedBox(height: 20),
             GestureDetector(
+              child: buttonEnter(),
               onTap: () {
                 setState(() {
                   isLoading = true;
+                  textButtonEnter = Colors.white;
                   colorButtonEnter = Color(0XFF35ced4);
                   textButtonAcess = "Aguarde...";
                 });
               },
-              child: AnimatedOpacity(
-                curve: Curves.linear,
-                duration: Duration(seconds: 4),
-                opacity: !_visible ? 0.0 : 1.0,
-                child: Container(
-                  height: 60,
-                  margin: EdgeInsets.only(left: 50, right: 50),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: colorButtonEnter),
-                  child: Row(
-                    children: [
-                      if (isLoading)
-                        Container(
-                          width: 40,
-                          height: 40,
-                          margin: EdgeInsets.only(left: 20),
-                          child: CircularProgressIndicator(),
-                        ),
-                      if (!isLoading)
-                        Container(
-                          width: 50,
-                          height: 50,
-                          margin: EdgeInsets.only(left: 10),
-                          child: Icon(
-                            FontAwesomeIcons.signInAlt,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: Color(0xFF0084c7)),
-                        ),
-                      Container(
-                          width: 200,
-                          child: Center(
-                              child: Text(
-                            textButtonAcess,
-                            style: TextStyle(
-                                color: Color(0xFF0084c7),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          )))
-                    ],
-                  ),
-                ),
-              ),
-            )
+            ),
+            SizedBox(height: 50),
+            buttonHelp(),
           ],
         ),
       ),
@@ -236,6 +194,80 @@ class _LoginScreenState extends State<LoginScreen>
             ),
             labelStyle: TextStyle(color: Colors.white),
             labelText: labelText),
+      ),
+    );
+  }
+
+  Widget buttonHelp() {
+    return AnimatedOpacity(
+      curve: Curves.linear,
+      duration: Duration(seconds: 4),
+      opacity: !_visible ? 0.0 : 1.0,
+      child: Container(
+        height: 50,
+        margin: EdgeInsets.only(left: 65, right: 65),
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50), color: Colors.white),
+        child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(10),
+            child: Text(
+              "Esqueceu sua senha ou login ? 🤔",
+              style: TextStyle(
+                  color: Color(0xFF0084c7),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14),
+            )),
+      ),
+    );
+  }
+
+  Widget buttonEnter() {
+    return AnimatedOpacity(
+      curve: Curves.linear,
+      duration: Duration(seconds: 4),
+      opacity: !_visible ? 0.0 : 1.0,
+      child: Container(
+        height: 60,
+        margin: EdgeInsets.only(left: 50, right: 50),
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50), color: colorButtonEnter),
+        child: Row(
+          children: [
+            if (isLoading)
+              Container(
+                width: 40,
+                height: 40,
+                margin: EdgeInsets.only(left: 20),
+                child: CircularProgressIndicator(),
+              ),
+            if (!isLoading)
+              Container(
+                width: 50,
+                height: 50,
+                margin: EdgeInsets.only(left: 10),
+                child: Icon(
+                  FontAwesomeIcons.signInAlt,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: Color(0xFF0084c7)),
+              ),
+            Container(
+                width: 200,
+                child: Center(
+                    child: Text(
+                  textButtonAcess,
+                  style: TextStyle(
+                      color: textButtonEnter,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                )))
+          ],
+        ),
       ),
     );
   }

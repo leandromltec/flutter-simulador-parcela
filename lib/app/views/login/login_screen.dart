@@ -55,51 +55,95 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              stops: [0.5, 2],
-              colors: [Color(0xFF0084c7), Color(0XFF35ced4)]),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            textFormFieldLogin(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.5, 2],
+                colors: [Color(0xFF0084c7), Color(0XFF35ced4)]),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                margin:
+                    EdgeInsets.only(top: 50, left: 40, right: 40, bottom: 70),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    stops: [0.2, 1],
+                    colors: [Color(0xFF009232), Color(0xFF273c75)],
+                  ),
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 70,
+                      height: 70,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      child: FractionallySizedBox(
+                        widthFactor: 0.7,
+                        child: Image(
+                          fit: BoxFit.fill,
+                          image:
+                              AssetImage('assets/images/icon_button_home.png'),
+                        ),
+                      ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(top: 20, bottom: 20),
+                        width: 250,
+                        child: Center(
+                            child: Text(
+                          "Simulador de Parcela Variável",
+                          style: TextStyle(color: Colors.white),
+                        )))
+                  ],
+                ),
+              ),
+              textFormFieldLogin(
+                  context: context,
+                  formKey: "Login",
+                  controller: controllerLogin,
+                  labelText: "Digite seu e-mail",
+                  keyboardType: TextInputType.emailAddress,
+                  prefixIcon: FontAwesomeIcons.userAlt),
+              textFormFieldLogin(
                 context: context,
-                formKey: "Login",
-                controller: controllerLogin,
-                labelText: "Digite seu e-mail",
-                keyboardType: TextInputType.emailAddress,
-                prefixIcon: FontAwesomeIcons.userAlt),
-            textFormFieldLogin(
-              context: context,
-              controller: controllerPassword,
-              formKey: "Senha",
-              labelText: "Digite sua senha",
-              keyboardType: TextInputType.text,
-              prefixIcon: FontAwesomeIcons.key,
-              constainsSuffixIcon: true,
-            ),
-            SizedBox(height: 20),
-            GestureDetector(
-              child: buttonEnter(),
-              onTap: () {
-                setState(() {
-                  isLoading = true;
-                  textButtonEnter = Colors.white;
-                  colorButtonEnter = Color(0XFF35ced4);
-                  textButtonAcess = "Aguarde...";
-                });
-              },
-            ),
-            SizedBox(height: 50),
-            buttonHelp(),
-          ],
+                controller: controllerPassword,
+                formKey: "Senha",
+                labelText: "Digite sua senha",
+                keyboardType: TextInputType.text,
+                prefixIcon: FontAwesomeIcons.key,
+                constainsSuffixIcon: true,
+              ),
+              SizedBox(height: 20),
+              GestureDetector(
+                child: buttonEnter(),
+                onTap: () {
+                  setState(() {
+                    isLoading = true;
+                    textButtonEnter = Colors.white;
+                    colorButtonEnter = Color(0XFF35ced4);
+                    textButtonAcess = "Aguarde...";
+                  });
+                },
+              ),
+              SizedBox(height: 50),
+              buttonHelp(),
+            ],
+          ),
         ),
       ),
     );

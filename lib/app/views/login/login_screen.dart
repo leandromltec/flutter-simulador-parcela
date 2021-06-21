@@ -6,22 +6,47 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen>
+    with TickerProviderStateMixin {
+  AnimationController? _animationController;
+  Animation? _animation;
+
   bool changeSuffixIcon = true;
+  IconData? suffixIcon = FontAwesomeIcons.eye;
 
   bool obscureText = true;
-
-  IconData? suffixIcon = FontAwesomeIcons.eye;
 
   bool isLoading = false;
 
   String textButtonAcess = "Entrar";
 
+  double sizeContainer = 100;
+
   TextEditingController controllerLogin = new TextEditingController();
   TextEditingController controllerPassword = new TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 6));
+
+    _animation =
+        CurvedAnimation(parent: _animationController!, curve: Curves.linear);
+
+    _animationController!.forward();
+
+    _animationController!
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    //sizeContainer = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -61,39 +86,43 @@ class _LoginScreenState extends State<LoginScreen> {
                   textButtonAcess = "Aguarde...";
                 });
               },
-              child: Container(
-                height: 60,
-                margin: EdgeInsets.only(left: 50, right: 50),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Color(0XFF35ced4)),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 50,
-                      height: 50,
-                      margin: EdgeInsets.only(left: 10),
-                      child:  
-                      Icon(
-                        FontAwesomeIcons.signInAlt,
-                        color: Colors.white,
-                        size: 30,
+              child: AnimatedOpacity(
+                curve: Curves.linear,
+                duration: Duration(seconds: 4),
+                opacity: 1.0,
+                child: Container(
+                  height: 60,
+                  margin: EdgeInsets.only(left: 50, right: 50),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Color(0XFF35ced4)),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 50,
+                        height: 50,
+                        margin: EdgeInsets.only(left: 10),
+                        child: Icon(
+                          FontAwesomeIcons.signInAlt,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Color(0xFF0084c7)),
                       ),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Color(0xFF0084c7)),
-                    ),
-                    Container(
-                        width: 200,
-                        child: Center(
-                            child: Text(
-                          textButtonAcess,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        )))
-                  ],
+                      Container(
+                          width: 200,
+                          child: Center(
+                              child: Text(
+                            textButtonAcess,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          )))
+                    ],
+                  ),
                 ),
               ),
             )
@@ -114,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }) {
     return Container(
       height: 100,
-      width: MediaQuery.of(context).size.width,
+      width: _animation!.value * MediaQuery.of(context).size.width,
       color: Colors.transparent,
       margin: EdgeInsets.only(left: 20, right: 20),
       padding: EdgeInsets.all(5),

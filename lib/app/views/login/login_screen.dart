@@ -20,7 +20,9 @@ class _LoginScreenState extends State<LoginScreen>
 
   String textButtonAcess = "Entrar";
 
-  double sizeContainer = 100;
+  bool _visible = false;
+
+  Color colorButtonEnter = Colors.white;
 
   TextEditingController controllerLogin = new TextEditingController();
   TextEditingController controllerPassword = new TextEditingController();
@@ -30,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen>
     super.initState();
 
     _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 6));
+        AnimationController(vsync: this, duration: Duration(seconds: 5));
 
     _animation =
         CurvedAnimation(parent: _animationController!, curve: Curves.linear);
@@ -41,12 +43,17 @@ class _LoginScreenState extends State<LoginScreen>
       ..addListener(() {
         setState(() {});
       });
+
+    //Altera o estado da opacidade
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      setState(() {
+        _visible = !_visible;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    //sizeContainer = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -82,42 +89,50 @@ class _LoginScreenState extends State<LoginScreen>
               onTap: () {
                 setState(() {
                   isLoading = true;
-
+                  colorButtonEnter = Color(0XFF35ced4);
                   textButtonAcess = "Aguarde...";
                 });
               },
               child: AnimatedOpacity(
                 curve: Curves.linear,
                 duration: Duration(seconds: 4),
-                opacity: 1.0,
+                opacity: !_visible ? 0.0 : 1.0,
                 child: Container(
                   height: 60,
                   margin: EdgeInsets.only(left: 50, right: 50),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Color(0XFF35ced4)),
+                      color: colorButtonEnter),
                   child: Row(
                     children: [
-                      Container(
-                        width: 50,
-                        height: 50,
-                        margin: EdgeInsets.only(left: 10),
-                        child: Icon(
-                          FontAwesomeIcons.signInAlt,
-                          color: Colors.white,
-                          size: 30,
+                      if (isLoading)
+                        Container(
+                          width: 40,
+                          height: 40,
+                          margin: EdgeInsets.only(left: 20),
+                          child: CircularProgressIndicator(),
                         ),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Color(0xFF0084c7)),
-                      ),
+                      if (!isLoading)
+                        Container(
+                          width: 50,
+                          height: 50,
+                          margin: EdgeInsets.only(left: 10),
+                          child: Icon(
+                            FontAwesomeIcons.signInAlt,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Color(0xFF0084c7)),
+                        ),
                       Container(
                           width: 200,
                           child: Center(
                               child: Text(
                             textButtonAcess,
                             style: TextStyle(
-                                color: Colors.white,
+                                color: Color(0xFF0084c7),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16),
                           )))

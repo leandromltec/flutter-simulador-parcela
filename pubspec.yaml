@@ -50,6 +50,7 @@ dependencies:
   webview_flutter: ^2.0.8
   device_info: ^2.0.2
   crypto: ^3.0.1
+  dartz: ^0.10.0-nullsafety.0
   font_awesome_flutter: ^9.0.0
   
   map_launcher: ^2.0.0

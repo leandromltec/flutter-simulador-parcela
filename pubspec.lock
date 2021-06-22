@@ -205,7 +205,7 @@ packages:
     source: hosted
     version: "2.0.0"
   dartz:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: dartz
       url: "https://pub.dartlang.org"

@@ -12,13 +12,16 @@ class AnimatedHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       //Remove o botão voltar na navegação de telas
-      //automaticallyImplyLeading: false,
+      automaticallyImplyLeading: false,
       actions: [
         Align(
           alignment: Alignment.centerRight,
 
           child: Container(
-            margin: EdgeInsets.only(right: 20, top: 20),
+            margin: EdgeInsets.only(
+              right: 20,
+              top: 20,
+            ),
             child: ElevatedButton.icon(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/login');
@@ -27,13 +30,6 @@ class AnimatedHeader extends StatelessWidget {
                 style: ElevatedButton.styleFrom(primary: Color(0xFF0084c7)),
                 label: Text("Entrar")),
           ),
-
-          /*child: CircleAvatar(
-          backgroundImage: AssetImage('assets/images/leandro.png'),
-          backgroundColor: Colors.grey[400],
-          radius: 20.0,
-        ),*/
-          //),
         )
       ],
       expandedHeight: 100.0,

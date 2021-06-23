@@ -5,7 +5,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_simulador_parcela/app/interfaces/client_http_interface.dart';
 import 'package:flutter_simulador_parcela/app/shared/constants/url_api_constants.dart';
-import 'package:flutter_simulador_parcela/app/shared/utils/uierror.dart';
+
 
 class ClientHttpService implements IClientHttpService {
   @override

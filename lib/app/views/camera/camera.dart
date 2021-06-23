@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter_simulador_parcela/app/shared/utils/uierror.dart';
 import 'package:flutter_simulador_parcela/app/views/camera/camera_screen.dart';
 
 //https://flutter.dev/docs/cookbook/plugins/picture-using-camera
@@ -81,7 +82,13 @@ class _CameraComponentState extends State<CameraComponent> {
                     builder: (context) => CameraScreen(
                           imagePath: takeImage.path,
                         )));
-          } on CameraException catch (e) {}
+          } on CameraException catch (e) {
+            UIHelper.showDialogError(
+                context: context,
+                titleError: "Erro ao Fotografar",
+                messageError:
+                    "Descrição do erro - " + e.description.toString());
+          }
         },
       ),
     );

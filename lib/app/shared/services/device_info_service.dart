@@ -8,8 +8,6 @@ Future<Map<String, dynamic>> getDeviceInfo() async {
 
   Map<String, dynamic> deviceData = <String, dynamic>{};
 
-  String nameDevice = "device";
-
   try {
     if (Platform.isAndroid) {
       //AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;

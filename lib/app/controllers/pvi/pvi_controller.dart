@@ -20,7 +20,7 @@ abstract class _ControllerPVI with Store {
   Future<List<ItemDropdDown>> getListItensDropDown(
       {required String endPoint}) async {
     List<ItemDropdDown> list =
-        await repository!.getItemsDropDown(nameEndPoint: endPoint);
+        await repository.getItemsDropDown(nameEndPoint: endPoint);
 
     return list;
   }
@@ -28,6 +28,6 @@ abstract class _ControllerPVI with Store {
   @action
   getListItensDropDownManagement() {
     listItemsDropdDown =
-        repository!.getItemsDropDown(nameEndPoint: 'gerencia').asObservable();
+        repository.getItemsDropDown(nameEndPoint: 'gerencia').asObservable();
   }
 }

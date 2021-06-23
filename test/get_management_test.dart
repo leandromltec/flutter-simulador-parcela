@@ -15,20 +15,16 @@ class ClientHttpMock {
 }
 
 main() {
-  /*test('Erro Gerência', () async {
-    final controllerDropDown = Modular.get<ControllerPVI>();
-    List<ItemDropdDown> list =
-        await controllerDropDown.getListItensDropDownManagement();
+  test('Erro Gerência', () async {
+    final ClientHttpService clientHttp = new ClientHttpService();
+    List<dynamic> json = await clientHttp.get('gerencia');
 
-    expect(list, null);
-  });*/
+    expect(json.length, 0);
+  });
 
-  test('OK API REST', () async {
+  /*test('OK API REST', () async {
     final api = await ClientHttpMock().getURL();
 
     expect(api, null);
-  });
-
-
-  
+  });*/
 }

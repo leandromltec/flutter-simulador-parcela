@@ -5,22 +5,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_simulador_parcela/app/interfaces/client_http_interface.dart';
 import 'package:flutter_simulador_parcela/app/shared/constants/url_api_constants.dart';
+import 'package:flutter_simulador_parcela/app/shared/utils/uierror.dart';
 
 class ClientHttpService implements IClientHttpService {
   @override
   Future get(String endPoint) async {
-    
-     var dataAPI;
-    try {
-      final response = await Dio().get(BASE_URL_API + endPoint);
-      if (response.statusCode != 200)
-        dataAPI = null;
-      else
-        dataAPI = response.data;
+    var dataAPI;
 
-      return dataAPI;
-    } catch (e) {
-      
-    }
+    final response = await Dio().get(BASE_URL_API + endPoint);
+    if (response.statusCode != 200)
+      dataAPI = null;
+    else
+      dataAPI = response.data;
+
+    return dataAPI;
   }
 }

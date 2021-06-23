@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_simulador_parcela/app/controllers/pvi/pvi_controller.dart';
 import 'package:flutter_simulador_parcela/app/models/app/item_dropdown.dart';
 import 'package:flutter_simulador_parcela/app/shared/services/shared_local_service.dart';
+import 'package:flutter_simulador_parcela/app/shared/utils/uierror.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/app_dropdown/dropdown_required.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/divider.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/app_dropdown/dropdown.dart';
@@ -81,43 +82,55 @@ class _PVIScreenState extends State<PVIScreen> {
           if (controllerDropDown.listItemsDropdDown!.value == null)
             return CircularProgressIndicator();
           else {
-            List<ItemDropdDown> listItemsManagement = controllerDropDown
-                .listItemsDropdDown!.value!
-              ..sort((a, b) =>
-                  a.title!.toUpperCase().compareTo(b.title!.toUpperCase()));
-            return DropDownItems(
-              dropdownButton: DropdownButton<ItemDropdDown>(
-                hint: Text("Selecione"),
-                items: (listItemsManagement.map((ItemDropdDown e) {
-                  return DropdownMenuItem<ItemDropdDown>(
-                    child: Text(e.title!.toUpperCase()),
-                    value: e,
-                  );
-                }).toList()),
-                isExpanded: true,
-                onChanged: (ItemDropdDown? value) async {
-                  setState(() {
-                    loadingInstallation = true;
-                    itemSelectedManagement = value;
-                  });
-                  await controllerDropDown
-                      .getListItensDropDown(endPoint: 'gerencia')
-                      .then((list) => listItemDropDown = list);
+            try {
+              List<ItemDropdDown> listItemsManagement = controllerDropDown
+                  .listItemsDropdDown!.value!
+                ..sort((a, b) =>
+                    a.title!.toUpperCase().compareTo(b.title!.toUpperCase()));
+              return DropDownItems(
+                dropdownButton: DropdownButton<ItemDropdDown>(
+                  hint: Text("Selecione"),
+                  items: (listItemsManagement.map((ItemDropdDown e) {
+                    return DropdownMenuItem<ItemDropdDown>(
+                      child: Text(e.title!.toUpperCase()),
+                      value: e,
+                    );
+                  }).toList()),
+                  isExpanded: true,
+                  onChanged: (ItemDropdDown? value) async {
+                    setState(() {
+                      loadingInstallation = true;
+                      itemSelectedManagement = value;
+                    });
+                    await controllerDropDown
+                        .getListItensDropDown(endPoint: 'gerencia')
+                        .then((list) => listItemDropDown = list);
 
-                  setState(() {
-                    validateChildFiltersManagement();
+                    setState(() {
+                      validateChildFiltersManagement();
 
-                    loadingInstallation = false;
-
-                    if (value!.id != "0" || value.id != null) {
-                      textHintInstallation = "Selecione";
                       loadingInstallation = false;
-                    }
-                  });
-                },
-                value: itemSelectedManagement,
-              ),
-            );
+
+                      if (value!.id != "0" || value.id != null) {
+                        textHintInstallation = "Selecione";
+                        loadingInstallation = false;
+                      }
+                    });
+                  },
+                  value: itemSelectedManagement,
+                ),
+              );
+            } catch (e) {
+              UIHelper.showDialogError(
+                  context: context,
+                  titleError: "Erro ao carregar gerência",
+                  messageError: "Descrição do erro - " + e.toString());
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: Text("* Não foi possível carregar gerência"),
+              );
+            }
           }
         }),
         //*Fim DropDown Gerência
@@ -286,7 +299,6 @@ class _PVIScreenState extends State<PVIScreen> {
 
   validateChildFiltersManagement() {
     if (listInstallation.length > 0) {
-      
       listOperationalName = [];
       listOperationalCode = [];
 
@@ -294,8 +306,6 @@ class _PVIScreenState extends State<PVIScreen> {
       textHintInstallation = "Selecione";
       textHintOperationalName = "Selecione uma instalação para operacional";
       textHintOperationalCode = "Selecione uma operação para código";
-
-      
     } else {
       listInstallation = listItemDropDown;
     }

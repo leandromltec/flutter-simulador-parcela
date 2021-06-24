@@ -11,6 +11,7 @@ import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
 
 import 'package:flutter_simulador_parcela/app/views/camera/camera_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/login/login_screen.dart';
+import 'package:flutter_simulador_parcela/app/views/splash_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/task/task_list_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/home/home_page.dart';
 import 'package:flutter_simulador_parcela/app/views/map/map_screen.dart';
@@ -31,7 +32,8 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => HomePage()),
+    ChildRoute('/', child: (_, args) => SplashScreen()),
+    ChildRoute('/home', child: (_, args) => HomePage()),
     ChildRoute('/login', child: (_, args) => LoginScreen()),
     ChildRoute('/map/:menuId',
         child: (_, args) => MapScreen(menuId: args.params["menuId"])),

@@ -13,13 +13,12 @@ class HomeButton extends StatelessWidget {
           child: Container(
             width: 50,
             height: 50,
-            
             child: Image(
               fit: BoxFit.fitWidth,
               image: AssetImage('assets/images/icon_button_home.png'),
             ),
           ),
-          onPressed: () => Navigator.of(context).pushNamed('/')),
+          onPressed: () => Navigator.of(context).pushNamed('/home')),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_simulador_parcela/app/shared/constants/routes_screens_constants.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app_components/app_dropdown/dialog_alert_component_app.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -50,8 +51,8 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
                         setState(() {
                           widget.selectedItemMenu = "1";
                         });
-                        Navigator.of(context)
-                            .pushNamed('/task/${widget.selectedItemMenu}');
+                        Navigator.of(context).pushNamed(RouteScreen.taskScreen +
+                            '/${widget.selectedItemMenu}');
                       },
                     ),
                   ),
@@ -95,8 +96,9 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
                           widget.selectedItemMenu = "2";
                         });
 
-                        Navigator.of(context)
-                            .pushNamed('/camera/${widget.selectedItemMenu}');
+                        Navigator.of(context).pushNamed(
+                            RouteScreen.cameraScreen +
+                                '/${widget.selectedItemMenu}');
                       },
                     ),
                   ),
@@ -153,8 +155,9 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
                           }
                         }
                         if (serviceEnabled)
-                          Navigator.of(context)
-                              .pushNamed('/map/${widget.selectedItemMenu}');
+                          Navigator.of(context).pushNamed(
+                              RouteScreen.mapScreen +
+                                  '/${widget.selectedItemMenu}');
                       },
                     ),
                   ),
@@ -196,8 +199,9 @@ class _BottomMenuNavigationState extends State<BottomMenuNavigation> {
                         setState(() {
                           widget.selectedItemMenu = "5";
                         });
-                        Navigator.of(context)
-                            .pushNamed('/about/${widget.selectedItemMenu}');
+                        Navigator.of(context).pushNamed(
+                            RouteScreen.aboutScreen +
+                                '/${widget.selectedItemMenu}');
                       },
                     ),
                   ),

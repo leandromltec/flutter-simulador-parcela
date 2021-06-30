@@ -3,6 +3,7 @@
 /* Linkedin - https://www.linkedin.com/in/leandro-loureiro-dev/ */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_simulador_parcela/app/shared/constants/routes_screens_constants.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app/bottom_menu.dart';
 import 'package:flutter_simulador_parcela/app/views/components/app/button_home.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
@@ -16,7 +17,6 @@ class AnimatedHeader extends StatelessWidget {
       actions: [
         Align(
           alignment: Alignment.centerRight,
-
           child: Container(
             margin: EdgeInsets.only(
               right: 20,
@@ -24,7 +24,7 @@ class AnimatedHeader extends StatelessWidget {
             ),
             child: ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/login');
+                  Navigator.of(context).pushNamed(RouteScreen.loginScreen);
                 },
                 icon: Icon(Icons.account_circle_rounded),
                 style: ElevatedButton.styleFrom(primary: Color(0xFF0084c7)),

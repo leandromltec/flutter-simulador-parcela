@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_simulador_parcela/app/app_widget.dart';
 import 'package:flutter_simulador_parcela/app/controllers/task/task_controller.dart';
+import 'package:flutter_simulador_parcela/app/shared/constants/routes_screens_constants.dart';
 import 'package:flutter_simulador_parcela/app/views/about/about_screen.dart';
 import 'package:flutter_simulador_parcela/app/views/camera/camera.dart';
 
@@ -33,19 +34,22 @@ class AppModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => SplashScreen()),
-    ChildRoute('/home', child: (_, args) => HomePage()),
-    ChildRoute('/login', child: (_, args) => LoginScreen()),
-    ChildRoute('/map/:menuId',
+    ChildRoute(RouteScreen.homeScreen, child: (_, args) => HomePage()),
+    ChildRoute(RouteScreen.loginScreen, child: (_, args) => LoginScreen()),
+    ChildRoute(RouteScreen.mapScreen + '/:menuId',
         child: (_, args) => MapScreen(menuId: args.params["menuId"])),
-    ChildRoute('/task/:menuId',
+    ChildRoute(RouteScreen.taskScreen + '/:menuId',
         child: (_, args) => TaskListScreen(menuId: args.params["menuId"])),
-    ChildRoute('/pvi', child: (_, args) => PVIScreen()),
-    ChildRoute('/pvi/resultado', child: (_, args) => PVIResultsFilterPVI()),
-    ChildRoute('/pvi/time', child: (_, args) => PVITimeCourseScreen()),
-    ChildRoute('/camera/:menuId',
+    ChildRoute(RouteScreen.pviScreen, child: (_, args) => PVIScreen()),
+    ChildRoute(RouteScreen.pviResultScreen,
+        child: (_, args) => PVIResultsFilterPVI()),
+    ChildRoute(RouteScreen.pviTimeScreen,
+        child: (_, args) => PVITimeCourseScreen()),
+    ChildRoute(RouteScreen.cameraScreen + '/:menuId',
         child: (_, args) => CameraScreen(menuId: args.params["menuId"])),
-    ChildRoute("/camera/component", child: (_, args) => CameraComponent()),
-    ChildRoute("/about/:menuId",
+    ChildRoute(RouteScreen.cameraComponentScreen,
+        child: (_, args) => CameraComponent()),
+    ChildRoute(RouteScreen.aboutScreen + '/:menuId',
         child: (_, args) => AboutScreen(menuId: args.params["menuId"]))
   ];
 

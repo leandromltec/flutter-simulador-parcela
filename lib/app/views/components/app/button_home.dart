@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_simulador_parcela/app/shared/constants/routes_screens_constants.dart';
 import 'package:flutter_simulador_parcela/app/views/themes/colors.dart';
 
 class HomeButton extends StatelessWidget {
@@ -18,7 +19,8 @@ class HomeButton extends StatelessWidget {
               image: AssetImage('assets/images/icon_button_home.png'),
             ),
           ),
-          onPressed: () => Navigator.of(context).pushNamed('/home')),
+          onPressed: () =>
+              Navigator.of(context).pushNamed(RouteScreen.homeScreen)),
     );
   }
 }

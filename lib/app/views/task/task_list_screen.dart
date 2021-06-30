@@ -207,16 +207,23 @@ class _TaskListScreenState extends State<TaskListScreen> {
                               onPressed: () {
                                 showModalBottomSheet(
                                     context: context,
-                                    builder: (_) => AddTaskScreen((itemTask) {
-                                          controllerTask.addTask(itemTask);
-                                          setState(() {
-                                            if (controllerTask.listTask.length >
-                                                0)
-                                              containsTask = true;
-                                            else
-                                              containsTask = false;
-                                          });
-                                        }));
+                                    builder: (_) => Container(
+                                          padding: EdgeInsets.only(
+                                              bottom: MediaQuery.of(context)
+                                                  .viewInsets
+                                                  .bottom),
+                                          child: AddTaskScreen((itemTask) {
+                                            controllerTask.addTask(itemTask);
+                                            setState(() {
+                                              if (controllerTask
+                                                      .listTask.length >
+                                                  0)
+                                                containsTask = true;
+                                              else
+                                                containsTask = false;
+                                            });
+                                          }),
+                                        ));
                               }),
                         ),
                       ),

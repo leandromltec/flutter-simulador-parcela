@@ -22,6 +22,7 @@ Alguns pontos do projeto:
  - Flutter 2.0 com Modular 3.0;
  - Padrão de projeto MVC;
  - Gerenência de Estado Mobx;
+ - Testes de Unidade;
  - Acesso a APIs (package Dio);
  - Armazenamento interno (package Shared Preferences);
  - Serviço de localização (package Geolocator);
@@ -29,3 +30,5 @@ Alguns pontos do projeto:
  - Geração de arquivo em PDF (package pdf);
  - Utilização de inúmeros Widgets como barra superior animada (SliverAppBar) , filtros (Dropdow), campo data e hora (DateTimeFormField) entre outros.
 
+
+![til](./assets/images/app.gif)
